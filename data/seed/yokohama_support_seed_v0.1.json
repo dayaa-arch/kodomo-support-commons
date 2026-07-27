@@ -1,0 +1,3686 @@
+{
+  "schema_version": "0.1.0",
+  "dataset_name": "yokohama_support_seed",
+  "project_name": "よこはま支援さがし",
+  "generated_at": "2026-07-27",
+  "language": "ja",
+  "geographic_scope": "横浜市",
+  "record_count": 84,
+  "emergency_resource_count": 5,
+  "provider_type_counts": {
+    "child_family_support_center": 18,
+    "child_safety_hotline": 1,
+    "education_consultation": 3,
+    "mental_health_phone": 1,
+    "regional_childrearing_hub": 18,
+    "school_refusal_support": 4,
+    "ward_child_family_consultation": 18,
+    "ward_living_support": 18,
+    "youth_consultation": 2,
+    "youth_online_consultation": 1
+  },
+  "missing_value_policy": {
+    "storage": "公開情報で確認できない項目はnull",
+    "ui_display": "公式サイトで確認してください"
+  },
+  "data_notes": [
+    "横浜市・こども家庭庁などの公式公開ページから、MVP向けの初期シードとして事実項目を正規化した。",
+    "公開ウェブページは、必ずしもオープンライセンスの『オープンデータ』とは限らない。OSSで再配布する前に、各サイトの利用条件・著作権方針を確認すること。",
+    "説明文の長文転載は避け、施設名・連絡先・対象・受付時間などの事実情報と出典URLを中心に収録した。",
+    "児童家庭支援センターなど、市の一覧に住所・時間がない項目は推測せずnullにした。",
+    "地域子育て支援拠点は各区の主拠点のみを収録し、サテライトはv0.1では未収録。",
+    "区の隣接関係は、境界データによる検証が必要なためv0.1には含めていない。",
+    "掲載前に、電話番号・URL・受付時間について運営者またはメンテナーが再確認すること。"
+  ],
+  "theme_codes": {
+    "school_attendance": "学校に行けない・行きづらい",
+    "mood_anxiety": "気分の落ち込み・不安",
+    "family_parent_child": "家庭や親子関係",
+    "bullying_friendship": "いじめ・友人関係",
+    "living_financial": "生活や経済面",
+    "caregiving_young_carer": "子どもの世話や家族のケア",
+    "other": "その他"
+  },
+  "target_user_codes": {
+    "child": "子ども本人",
+    "parent_family": "自分の子ども・家族",
+    "school_staff": "学校関係者",
+    "supporter": "子どもの支援者",
+    "young_person": "若者本人",
+    "general_public": "その他・一般"
+  },
+  "consultation_method_codes": {
+    "phone": "電話",
+    "in_person": "来所・対面",
+    "line": "LINE",
+    "web_form": "Webフォーム",
+    "phone_callback": "電話での折り返し"
+  },
+  "ward_master": [
+    {
+      "code": "tsurumi",
+      "name": "鶴見区"
+    },
+    {
+      "code": "kanagawa",
+      "name": "神奈川区"
+    },
+    {
+      "code": "nishi",
+      "name": "西区"
+    },
+    {
+      "code": "naka",
+      "name": "中区"
+    },
+    {
+      "code": "minami",
+      "name": "南区"
+    },
+    {
+      "code": "konan",
+      "name": "港南区"
+    },
+    {
+      "code": "hodogaya",
+      "name": "保土ケ谷区"
+    },
+    {
+      "code": "asahi",
+      "name": "旭区"
+    },
+    {
+      "code": "isogo",
+      "name": "磯子区"
+    },
+    {
+      "code": "kanazawa",
+      "name": "金沢区"
+    },
+    {
+      "code": "kohoku",
+      "name": "港北区"
+    },
+    {
+      "code": "midori",
+      "name": "緑区"
+    },
+    {
+      "code": "aoba",
+      "name": "青葉区"
+    },
+    {
+      "code": "tsuzuki",
+      "name": "都筑区"
+    },
+    {
+      "code": "totsuka",
+      "name": "戸塚区"
+    },
+    {
+      "code": "sakae",
+      "name": "栄区"
+    },
+    {
+      "code": "izumi",
+      "name": "泉区"
+    },
+    {
+      "code": "seya",
+      "name": "瀬谷区"
+    }
+  ],
+  "ward_adjacency": {
+    "status": "not_included",
+    "reason": "行政区境界の公式地理データで隣接関係を検証してから追加する。"
+  },
+  "source_catalog": [
+    {
+      "id": "ward_child_family_consultation",
+      "title": "こども家庭相談",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html"
+    },
+    {
+      "id": "regional_childrearing_hub",
+      "title": "地域子育て支援拠点",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html"
+    },
+    {
+      "id": "child_family_support_center",
+      "title": "児童家庭支援センター",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html"
+    },
+    {
+      "id": "ward_living_support",
+      "title": "各区の相談窓口（生活支援課）",
+      "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html"
+    },
+    {
+      "id": "education_consultation",
+      "title": "教育相談",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html"
+    },
+    {
+      "id": "school_refusal_support",
+      "title": "不登校児童生徒への支援",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html"
+    },
+    {
+      "id": "youth_line",
+      "title": "よこはま子ども・若者相談室",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/ikusei/jiritsushien/kd-ikuseikowakasouda.html"
+    },
+    {
+      "id": "hikikomori_youth_center",
+      "title": "ひきこもり総合支援・若者相談センター",
+      "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/hikikomori/soudan.html"
+    },
+    {
+      "id": "mental_health_phone",
+      "title": "こころの電話相談",
+      "url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/sodancenter/kokorosoudan.html"
+    },
+    {
+      "id": "child_abuse",
+      "title": "こども虐待の相談・通告・情報提供先",
+      "url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/DV/gyakutaisoudan.html"
+    },
+    {
+      "id": "child_abuse_189",
+      "title": "児童相談所虐待対応ダイヤル189",
+      "url": "https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou-dial/"
+    },
+    {
+      "id": "emergency_110_119",
+      "title": "110番・119番",
+      "url": "https://www.city.yokohama.lg.jp/lang/residents/living-guide/emergency/110-119.html"
+    }
+  ],
+  "support_providers": [
+    {
+      "id": "ward-child-family-tsurumi",
+      "name": "鶴見区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "tsurumi",
+      "ward_name": "鶴見区",
+      "address": "横浜市鶴見区鶴見中央3-20-1",
+      "phone": "045-510-1840",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市鶴見区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-kanagawa",
+      "name": "神奈川区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "kanagawa",
+      "ward_name": "神奈川区",
+      "address": "横浜市神奈川区広台太田町3-8",
+      "phone": "045-411-7173",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市神奈川区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-nishi",
+      "name": "西区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "nishi",
+      "ward_name": "西区",
+      "address": "横浜市西区中央1-5-10",
+      "phone": "045-320-8470",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市西区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-naka",
+      "name": "中区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "naka",
+      "ward_name": "中区",
+      "address": "横浜市中区日本大通35",
+      "phone": "045-224-8171",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市中区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-minami",
+      "name": "南区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "minami",
+      "ward_name": "南区",
+      "address": "横浜市南区浦舟町2-33",
+      "phone": "045-341-1153",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市南区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-konan",
+      "name": "港南区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "konan",
+      "ward_name": "港南区",
+      "address": "横浜市港南区港南4-2-10",
+      "phone": "045-847-8439",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市港南区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-hodogaya",
+      "name": "保土ケ谷区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区川辺町2-9",
+      "phone": "045-334-6396",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市保土ケ谷区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-asahi",
+      "name": "旭区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "asahi",
+      "ward_name": "旭区",
+      "address": "横浜市旭区鶴ケ峰1-4-12",
+      "phone": "045-954-6160",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市旭区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-isogo",
+      "name": "磯子区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "isogo",
+      "ward_name": "磯子区",
+      "address": "横浜市磯子区磯子3-5-1",
+      "phone": "045-750-2525",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市磯子区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-kanazawa",
+      "name": "金沢区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "kanazawa",
+      "ward_name": "金沢区",
+      "address": "横浜市金沢区泥亀2-9-1",
+      "phone": "045-788-7728",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市金沢区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-kohoku",
+      "name": "港北区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "kohoku",
+      "ward_name": "港北区",
+      "address": "横浜市港北区大豆戸町26-1",
+      "phone": "045-540-2388",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市港北区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-midori",
+      "name": "緑区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "midori",
+      "ward_name": "緑区",
+      "address": "横浜市緑区寺山町118",
+      "phone": "045-930-2356",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市緑区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-aoba",
+      "name": "青葉区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "aoba",
+      "ward_name": "青葉区",
+      "address": "横浜市青葉区市ケ尾町31-4",
+      "phone": "045-978-2460",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市青葉区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-tsuzuki",
+      "name": "都筑区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "tsuzuki",
+      "ward_name": "都筑区",
+      "address": "横浜市都筑区茅ケ崎中央32-1",
+      "phone": "045-948-2349",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市都筑区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-totsuka",
+      "name": "戸塚区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "totsuka",
+      "ward_name": "戸塚区",
+      "address": "横浜市戸塚区戸塚町16-17",
+      "phone": "045-866-8472",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市戸塚区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-sakae",
+      "name": "栄区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "sakae",
+      "ward_name": "栄区",
+      "address": "横浜市栄区桂町303-19",
+      "phone": "045-894-3790",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市栄区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-izumi",
+      "name": "泉区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "izumi",
+      "ward_name": "泉区",
+      "address": "横浜市泉区和泉中央北5-1-1",
+      "phone": "045-800-2465",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市泉区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "ward-child-family-seya",
+      "name": "瀬谷区 こども家庭相談",
+      "provider_type": "ward_child_family_consultation",
+      "ward_code": "seya",
+      "ward_name": "瀬谷区",
+      "address": "横浜市瀬谷区二ツ橋町190",
+      "phone": "045-367-5747",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "乳幼児期から学童期・思春期まで",
+      "cost": "無料",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00（12:00–13:00は受け付けていない場合あり）",
+      "operator": "横浜市瀬谷区役所 こども家庭支援課",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/kodomokateisoudan.html",
+      "source_updated_at": null,
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "秘密厳守。必要に応じて専門機関を紹介。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-aoba",
+      "name": "ラフール",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "aoba",
+      "ward_name": "青葉区",
+      "address": "横浜市青葉区青葉台1-4 青葉消防署青葉台消防出張所複合施設6階",
+      "phone": "045-981-3306",
+      "alternate_phone": "045-479-5810",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://lafull.net",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-asahi",
+      "name": "ひなたぼっこ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "asahi",
+      "ward_name": "旭区",
+      "address": "横浜市旭区二俣川1-67-4",
+      "phone": "045-442-3886",
+      "alternate_phone": "045-489-6170",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://hinataboko.net",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-izumi",
+      "name": "すきっぷ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "izumi",
+      "ward_name": "泉区",
+      "address": "横浜市泉区和泉中央南5-4-13 相鉄いずみ中央ビル209号",
+      "phone": "045-805-6111",
+      "alternate_phone": "045-805-6133",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://skip-izumi.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-isogo",
+      "name": "いそピヨ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "isogo",
+      "ward_name": "磯子区",
+      "address": "横浜市磯子区森1-7-10 トワイシア横濱磯子2階",
+      "phone": "045-750-1322",
+      "alternate_phone": "045-750-1324",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://isopiyo-isogo.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-kanagawa",
+      "name": "かなーちえ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "kanagawa",
+      "ward_name": "神奈川区",
+      "address": "横浜市神奈川区東神奈川1-29 かなっくシティ東部療育ビル3階",
+      "phone": "045-441-3901",
+      "alternate_phone": "045-441-7722",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://kana-chie.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-kanazawa",
+      "name": "とことこ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "kanazawa",
+      "ward_name": "金沢区",
+      "address": "横浜市金沢区能見台東5-6 2階",
+      "phone": "045-780-3205",
+      "alternate_phone": "045-701-3101",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.tokotoko-kanazawa.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-konan",
+      "name": "はっち",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "konan",
+      "ward_name": "港南区",
+      "address": "横浜市港南区日野2-4-6 1・2階",
+      "phone": "045-840-5882",
+      "alternate_phone": "045-844-0112",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.hacchi.org",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-kohoku",
+      "name": "どろっぷ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "kohoku",
+      "ward_name": "港北区",
+      "address": "横浜市港北区大倉山3-57-3",
+      "phone": "045-540-7420",
+      "alternate_phone": "045-547-1180",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.kohoku-drop.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-sakae",
+      "name": "にこりんく",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "sakae",
+      "ward_name": "栄区",
+      "address": "横浜市栄区桂町711",
+      "phone": "045-898-1615",
+      "alternate_phone": "045-891-0085",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://nicolink-sakae.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-seya",
+      "name": "にこてらす",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "seya",
+      "ward_name": "瀬谷区",
+      "address": "横浜市瀬谷区二ツ橋町469 せやまる・ふれあい館1階",
+      "phone": "045-391-8316",
+      "alternate_phone": "045-744-5554",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.nico-t.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-tsuzuki",
+      "name": "Popola（ポポラ）",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "tsuzuki",
+      "ward_name": "都筑区",
+      "address": "横浜市都筑区中川中央1-1-3 ショッピングタウンあいたい5階",
+      "phone": "045-912-5135",
+      "alternate_phone": "045-479-5920",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://popola.org",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-tsurumi",
+      "name": "わっくんひろば",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "tsurumi",
+      "ward_name": "鶴見区",
+      "address": "横浜市鶴見区豊岡町38-4",
+      "phone": "045-582-7590",
+      "alternate_phone": "045-582-5529",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://wakkunhiroba-tsurumi.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-totsuka",
+      "name": "とっとの芽",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "totsuka",
+      "ward_name": "戸塚区",
+      "address": "横浜市戸塚区川上町91-1 モレラ東戸塚3階",
+      "phone": "045-820-2885",
+      "alternate_phone": "045-719-2001",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.tottonome.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-naka",
+      "name": "のんびりんこ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "naka",
+      "ward_name": "中区",
+      "address": "横浜市中区住吉町1-12-1 belle横浜ビル3階",
+      "phone": "045-663-9715",
+      "alternate_phone": "045-228-8330",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://nonbirinco.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-nishi",
+      "name": "スマイル・ポート",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "nishi",
+      "ward_name": "西区",
+      "address": "横浜市西区みなとみらい3-3-1 KDX横浜みなとみらいタワー ショッピングプラザ3階",
+      "phone": "045-264-4355",
+      "alternate_phone": "045-306-9090",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://smile-port.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-hodogaya",
+      "name": "こっころ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区川辺町2-5 パークタワー横濱星川1階",
+      "phone": "045-340-0013",
+      "alternate_phone": "045-336-9707",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.kokkoro.org",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-midori",
+      "name": "いっぽ",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "midori",
+      "ward_name": "緑区",
+      "address": "横浜市緑区十日市場町817-8",
+      "phone": "045-989-5850",
+      "alternate_phone": "045-272-5643",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.midori-ippo.com",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "regional-childrearing-hub-minami",
+      "name": "はぐはぐの樹",
+      "provider_type": "regional_childrearing_hub",
+      "ward_code": "minami",
+      "ward_name": "南区",
+      "address": "横浜市南区弘明寺町158 カルム1 201号室",
+      "phone": "045-715-3728",
+      "alternate_phone": "045-721-8686",
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "family_parent_child",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "supporter"
+      ],
+      "target_age": "就学前の子どもと保護者",
+      "cost": "無料（利用登録が必要）",
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": null,
+      "official_site_url": "https://www.haghagnoki.jp",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kosodateshien/asobiba/support.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "alternate_phone は横浜子育てパートナーの予約・相談専用ダイヤル。",
+        "このデータセットでは各区の主拠点のみ収録し、サテライトは未収録。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-tsurumi",
+      "name": "児童家庭支援センター つるみらい",
+      "provider_type": "child_family_support_center",
+      "ward_code": "tsurumi",
+      "ward_name": "鶴見区",
+      "address": null,
+      "phone": "045-503-3633",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "特定非営利活動法人サードプレイス",
+      "official_site_url": "https://www.n-thirdplace.com/tsurumirai",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-kanagawa",
+      "name": "こども家庭支援センター いずみ",
+      "provider_type": "child_family_support_center",
+      "ward_code": "kanagawa",
+      "ward_name": "神奈川区",
+      "address": null,
+      "phone": "045-755-7145",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人いずみ",
+      "official_site_url": "https://kodomokatei-izumi.org/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-nishi",
+      "name": "児童家庭支援センター らいく",
+      "provider_type": "child_family_support_center",
+      "ward_code": "nishi",
+      "ward_name": "西区",
+      "address": null,
+      "phone": "045-334-8040",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "一般社団法人SOCIAL NEXT",
+      "official_site_url": "https://jikasenlike.jp/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-naka",
+      "name": "児童家庭支援センター みなと",
+      "provider_type": "child_family_support_center",
+      "ward_code": "naka",
+      "ward_name": "中区",
+      "address": null,
+      "phone": "045-663-2759",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人キリスト教児童福祉会",
+      "official_site_url": "https://minato.jpn.org/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-minami",
+      "name": "児童家庭支援センター むつみの木",
+      "provider_type": "child_family_support_center",
+      "ward_code": "minami",
+      "ward_name": "南区",
+      "address": null,
+      "phone": "045-325-8828",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人たすけあいゆい",
+      "official_site_url": "https://www.yui-yui.net/archives/business/childfamilysupportcenter-mutsuminoki",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-konan",
+      "name": "のば こども家庭支援センター",
+      "provider_type": "child_family_support_center",
+      "ward_code": "konan",
+      "ward_name": "港南区",
+      "address": null,
+      "phone": "045-840-5092",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人和枝福祉会",
+      "official_site_url": "https://www.kazuefukushikai.jp/noba/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-hodogaya",
+      "name": "ゆめのね",
+      "provider_type": "child_family_support_center",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": null,
+      "phone": "045-465-4472",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人ほどがや",
+      "official_site_url": "https://www.e-hodogaya.org/yumenone.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-asahi",
+      "name": "児童家庭支援センター おおいけ",
+      "provider_type": "child_family_support_center",
+      "ward_code": "asahi",
+      "ward_name": "旭区",
+      "address": null,
+      "phone": "045-951-4935",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人旭児童ホーム",
+      "official_site_url": null,
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-isogo",
+      "name": "こども家庭支援センター ゆいの木",
+      "provider_type": "child_family_support_center",
+      "ward_code": "isogo",
+      "ward_name": "磯子区",
+      "address": null,
+      "phone": "045-349-4069",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人たすけあいゆい",
+      "official_site_url": "https://www.yui-yui.net/archives/business/childfamilysupportcenter_yuinoki",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-kanazawa",
+      "name": "こども家庭支援センター さくらの木",
+      "provider_type": "child_family_support_center",
+      "ward_code": "kanazawa",
+      "ward_name": "金沢区",
+      "address": null,
+      "phone": "045-355-0006",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人たすけあいゆい",
+      "official_site_url": null,
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-kohoku",
+      "name": "ラ・コッコラ港北",
+      "provider_type": "child_family_support_center",
+      "ward_code": "kohoku",
+      "ward_name": "港北区",
+      "address": null,
+      "phone": "045-717-6740",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人千里会",
+      "official_site_url": "https://www.senrikai.jp/rakokkora/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-midori",
+      "name": "ダ・ニーノみどり",
+      "provider_type": "child_family_support_center",
+      "ward_code": "midori",
+      "ward_name": "緑区",
+      "address": null,
+      "phone": "045-933-3700",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人千里会",
+      "official_site_url": "https://www.senrikai.jp/danino-midori/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-aoba",
+      "name": "児童家庭支援センター みたけ",
+      "provider_type": "child_family_support_center",
+      "ward_code": "aoba",
+      "ward_name": "青葉区",
+      "address": null,
+      "phone": "045-979-2266",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人幼年保護会",
+      "official_site_url": "https://ymitake.ynakazato.jp/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-tsuzuki",
+      "name": "児童家庭支援センター かわわ",
+      "provider_type": "child_family_support_center",
+      "ward_code": "tsuzuki",
+      "ward_name": "都筑区",
+      "address": null,
+      "phone": "045-938-5056",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人旭児童ホーム",
+      "official_site_url": null,
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-totsuka",
+      "name": "こども家庭支援センター くらき",
+      "provider_type": "child_family_support_center",
+      "ward_code": "totsuka",
+      "ward_name": "戸塚区",
+      "address": null,
+      "phone": "045-390-0086",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人久良岐母子福祉会",
+      "official_site_url": "https://www.kuraki-boshi.or.jp/kokasen/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-sakae",
+      "name": "こども家庭支援センター にじ",
+      "provider_type": "child_family_support_center",
+      "ward_code": "sakae",
+      "ward_name": "栄区",
+      "address": null,
+      "phone": "045-435-9881",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人地域サポート虹",
+      "official_site_url": "https://sakae-niji.yokohama/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-izumi",
+      "name": "杜の郷 子ども家庭支援センター",
+      "provider_type": "child_family_support_center",
+      "ward_code": "izumi",
+      "ward_name": "泉区",
+      "address": null,
+      "phone": "045-806-0722",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "社会福祉法人ル・プリ",
+      "official_site_url": "https://le-pli.jp/facility/kodomo-sien/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "child-family-support-center-seya",
+      "name": "児童家庭支援センター うぃず",
+      "provider_type": "child_family_support_center",
+      "ward_code": "seya",
+      "ward_name": "瀬谷区",
+      "address": null,
+      "phone": "045-489-9090",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter"
+      ],
+      "target_age": "子どもとその家庭（詳細条件は各施設へ確認）",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": null,
+      "operator": "特定非営利活動法人さくらんぼ",
+      "official_site_url": "https://www.sakuranbo.or.jp/pages/73/",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
+      "source_updated_at": "2026-01-05",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
+        "開所・相談時間は施設ごとに異なる。"
+      ]
+    },
+    {
+      "id": "ward-living-support-tsurumi",
+      "name": "鶴見区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "tsurumi",
+      "ward_name": "鶴見区",
+      "address": "横浜市鶴見区鶴見中央3-20-1",
+      "phone": "045-510-1782",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市鶴見区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-kanagawa",
+      "name": "神奈川区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "kanagawa",
+      "ward_name": "神奈川区",
+      "address": "横浜市神奈川区広台太田町3-8",
+      "phone": "045-411-7103",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市神奈川区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-nishi",
+      "name": "西区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "nishi",
+      "ward_name": "西区",
+      "address": "横浜市西区中央1-5-10",
+      "phone": "045-320-8407",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市西区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-naka",
+      "name": "中区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "naka",
+      "ward_name": "中区",
+      "address": "横浜市中区日本大通35",
+      "phone": "045-224-8241",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市中区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-minami",
+      "name": "南区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "minami",
+      "ward_name": "南区",
+      "address": "横浜市南区浦舟町2-33",
+      "phone": "045-341-1203",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市南区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-konan",
+      "name": "港南区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "konan",
+      "ward_name": "港南区",
+      "address": "横浜市港南区港南4-2-10",
+      "phone": "045-847-8404",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市港南区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-hodogaya",
+      "name": "保土ケ谷区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区川辺町2-9",
+      "phone": "045-334-6314",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市保土ケ谷区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-asahi",
+      "name": "旭区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "asahi",
+      "ward_name": "旭区",
+      "address": "横浜市旭区鶴ケ峰1-4-12",
+      "phone": "045-954-6104",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市旭区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-isogo",
+      "name": "磯子区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "isogo",
+      "ward_name": "磯子区",
+      "address": "横浜市磯子区磯子3-5-1",
+      "phone": "045-750-2405",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市磯子区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-kanazawa",
+      "name": "金沢区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "kanazawa",
+      "ward_name": "金沢区",
+      "address": "横浜市金沢区泥亀2-9-1",
+      "phone": "045-788-7814",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市金沢区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-kohoku",
+      "name": "港北区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "kohoku",
+      "ward_name": "港北区",
+      "address": "横浜市港北区大豆戸町26-1",
+      "phone": "045-540-2329",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市港北区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-midori",
+      "name": "緑区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "midori",
+      "ward_name": "緑区",
+      "address": "横浜市緑区寺山町118",
+      "phone": "045-930-2318",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市緑区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-aoba",
+      "name": "青葉区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "aoba",
+      "ward_name": "青葉区",
+      "address": "横浜市青葉区市ケ尾町31-4",
+      "phone": "045-978-2446",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市青葉区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-tsuzuki",
+      "name": "都筑区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "tsuzuki",
+      "ward_name": "都筑区",
+      "address": "横浜市都筑区茅ケ崎中央32-1",
+      "phone": "045-948-2311",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市都筑区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-totsuka",
+      "name": "戸塚区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "totsuka",
+      "ward_name": "戸塚区",
+      "address": "横浜市戸塚区戸塚町16-17",
+      "phone": "045-866-8431",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市戸塚区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-sakae",
+      "name": "栄区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "sakae",
+      "ward_name": "栄区",
+      "address": "横浜市栄区桂町303-19",
+      "phone": "045-894-8400",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市栄区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-izumi",
+      "name": "泉区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "izumi",
+      "ward_name": "泉区",
+      "address": "横浜市泉区和泉中央北5-1-1",
+      "phone": "045-800-2305",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市泉区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "ward-living-support-seya",
+      "name": "瀬谷区役所 生活支援課生活支援係",
+      "provider_type": "ward_living_support",
+      "ward_code": "seya",
+      "ward_name": "瀬谷区",
+      "address": "横浜市瀬谷区二ツ橋町190",
+      "phone": "045-367-5705",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "living_financial"
+      ],
+      "target_users": [
+        "parent_family",
+        "young_person",
+        "general_public",
+        "supporter"
+      ],
+      "target_age": "年齢制限の記載なし",
+      "cost": null,
+      "reservation_required": null,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市瀬谷区役所",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/fukushi-kaigo/seikatsu/madoguchi.html",
+      "source_updated_at": "2025-09-12",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "土日祝日および12月29日から1月3日は休み。"
+      ]
+    },
+    {
+      "id": "yokohama-general-education-consultation",
+      "name": "一般教育相談",
+      "provider_type": "education_consultation",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": "045-624-9414",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone"
+      ],
+      "themes": [
+        "school_attendance",
+        "bullying_friendship",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family"
+      ],
+      "target_age": "小中学生",
+      "cost": null,
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 9:00–17:00（祝日・振替休日を除く）",
+      "operator": "横浜市教育委員会 教育総合相談センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "不登校、友人関係、学習、進路などの学校生活上の困りごと。"
+      ]
+    },
+    {
+      "id": "yokohama-child-sos-24h",
+      "name": "24時間子どもSOSダイヤル",
+      "provider_type": "education_consultation",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": "0120-078310",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone"
+      ],
+      "themes": [
+        "school_attendance",
+        "bullying_friendship",
+        "mood_anxiety",
+        "family_parent_child",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family"
+      ],
+      "target_age": "横浜市内在住・在学の子どもとその保護者",
+      "cost": "無料（フリーダイヤル）",
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "24時間365日",
+      "operator": "横浜市教育委員会",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": []
+    },
+    {
+      "id": "yokohama-school-life-anshin",
+      "name": "学校生活あんしんダイヤル（Web受付）",
+      "provider_type": "education_consultation",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": null,
+      "alternate_phone": null,
+      "consultation_methods": [
+        "web_form",
+        "phone_callback"
+      ],
+      "themes": [
+        "school_attendance",
+        "bullying_friendship",
+        "mood_anxiety",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family"
+      ],
+      "target_age": "横浜市立学校に通う児童生徒とその保護者",
+      "cost": null,
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "Web受付は24時間365日。折り返し対応は平日 9:00–17:00（祝日・年末年始を除く）",
+      "operator": "横浜市教育委員会",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "source_updated_at": "2026-05-29",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "2026年4月1日から電話受付ではなくインターネット受付。"
+      ]
+    },
+    {
+      "id": "heartful-center-kamiooka",
+      "name": "ハートフルセンター上大岡",
+      "provider_type": "school_refusal_support",
+      "ward_code": "konan",
+      "ward_name": "港南区",
+      "address": "横浜市港南区上大岡西1-6-1 ゆめおおおかオフィスタワー13階",
+      "phone": "045-671-4637",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "in_person",
+        "phone"
+      ],
+      "themes": [
+        "school_attendance"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff"
+      ],
+      "target_age": "横浜市内在住または横浜市立学校在籍の不登校の小中学生",
+      "cost": null,
+      "reservation_required": true,
+      "anonymous_available": false,
+      "parent_only_consultation": true,
+      "hours": "平日 9:30–15:00（学校休業日等を除く）",
+      "operator": "横浜市教育委員会 横浜教育支援センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_updated_at": "2026-07-21",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "見学は原則火・木曜日15:00から。",
+        "学校または教育支援センターへ申し込み。"
+      ]
+    },
+    {
+      "id": "heartful-space-tsurumi",
+      "name": "ハートフルスペース鶴見",
+      "provider_type": "school_refusal_support",
+      "ward_code": "tsurumi",
+      "ward_name": "鶴見区",
+      "address": "横浜市鶴見区豊岡町27-1 豊岡小学校内",
+      "phone": "045-671-4637",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "in_person",
+        "phone"
+      ],
+      "themes": [
+        "school_attendance"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff"
+      ],
+      "target_age": "横浜市内在住または横浜市立学校在籍の不登校の小中学生",
+      "cost": null,
+      "reservation_required": true,
+      "anonymous_available": false,
+      "parent_only_consultation": true,
+      "hours": "平日 9:30–15:00（学校休業日等を除く）",
+      "operator": "横浜市教育委員会 横浜教育支援センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_updated_at": "2026-07-21",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "見学は原則火・木曜日15:00から。",
+        "学校または教育支援センターへ申し込み。"
+      ]
+    },
+    {
+      "id": "heartful-space-kamihoshikawa",
+      "name": "ハートフルスペース上星川",
+      "provider_type": "school_refusal_support",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区釜台町5-5 5号棟4階",
+      "phone": "045-671-4637",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "in_person",
+        "phone"
+      ],
+      "themes": [
+        "school_attendance"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff"
+      ],
+      "target_age": "横浜市内在住または横浜市立学校在籍の不登校の小中学生",
+      "cost": null,
+      "reservation_required": true,
+      "anonymous_available": false,
+      "parent_only_consultation": true,
+      "hours": "平日 9:30–15:00（学校休業日等を除く）",
+      "operator": "横浜市教育委員会 横浜教育支援センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_updated_at": "2026-07-21",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "見学は原則火・木曜日15:00から。",
+        "学校または教育支援センターへ申し込み。"
+      ]
+    },
+    {
+      "id": "heartful-space-tsuzuki",
+      "name": "ハートフルスペース都筑",
+      "provider_type": "school_refusal_support",
+      "ward_code": "tsuzuki",
+      "ward_name": "都筑区",
+      "address": "横浜市都筑区牛久保西2-28-1",
+      "phone": "045-671-4637",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "in_person",
+        "phone"
+      ],
+      "themes": [
+        "school_attendance"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff"
+      ],
+      "target_age": "横浜市内在住または横浜市立学校在籍の不登校の小中学生",
+      "cost": null,
+      "reservation_required": true,
+      "anonymous_available": false,
+      "parent_only_consultation": true,
+      "hours": "平日 9:30–15:00（学校休業日等を除く）",
+      "operator": "横浜市教育委員会 横浜教育支援センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/futoukousien.html",
+      "source_updated_at": "2026-07-21",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "見学は原則火・木曜日15:00から。",
+        "学校または教育支援センターへ申し込み。"
+      ]
+    },
+    {
+      "id": "yokohama-children-youth-line",
+      "name": "よこはま子ども・若者相談室（LINE相談）",
+      "provider_type": "youth_online_consultation",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": null,
+      "alternate_phone": null,
+      "consultation_methods": [
+        "line"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "bullying_friendship",
+        "caregiving_young_carer",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "young_person",
+        "parent_family"
+      ],
+      "target_age": "横浜市内在住の39歳以下の子ども・若者とその家族等",
+      "cost": null,
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "毎日 14:00–21:00（年末年始を含む）",
+      "operator": "横浜市",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/ikusei/jiritsushien/kd-ikuseikowakasouda.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/ikusei/jiritsushien/kd-ikuseikowakasouda.html",
+      "source_updated_at": "2024-04-01",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": []
+    },
+    {
+      "id": "yokohama-hikikomori-consultation",
+      "name": "ひきこもり相談専用ダイヤル",
+      "provider_type": "youth_consultation",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区川辺町5-10 西部児童相談所複合棟3階",
+      "phone": "045-752-8400",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "school_attendance",
+        "mood_anxiety",
+        "family_parent_child",
+        "other"
+      ],
+      "target_users": [
+        "young_person",
+        "parent_family"
+      ],
+      "target_age": "横浜市内在住の概ね18歳以上の本人と家族等",
+      "cost": "無料",
+      "reservation_required": null,
+      "anonymous_available": true,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市ひきこもり総合支援・若者相談センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/hikikomori/soudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/hikikomori/soudan.html",
+      "source_updated_at": "2026-06-18",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "電話相談は匿名利用可。来所相談は必要に応じて案内され、予約制。"
+      ]
+    },
+    {
+      "id": "yokohama-youth-consultation",
+      "name": "若者相談ダイヤル",
+      "provider_type": "youth_consultation",
+      "ward_code": "hodogaya",
+      "ward_name": "保土ケ谷区",
+      "address": "横浜市保土ケ谷区川辺町5-10 西部児童相談所複合棟3階",
+      "phone": "045-752-8366",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone",
+        "in_person"
+      ],
+      "themes": [
+        "mood_anxiety",
+        "family_parent_child",
+        "other"
+      ],
+      "target_users": [
+        "young_person",
+        "parent_family"
+      ],
+      "target_age": "横浜市内在住の概ね18歳から39歳までの本人と家族",
+      "cost": "無料",
+      "reservation_required": null,
+      "anonymous_available": true,
+      "parent_only_consultation": true,
+      "hours": "平日 8:45–17:00",
+      "operator": "横浜市ひきこもり総合支援・若者相談センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/hikikomori/soudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/hikikomori/soudan.html",
+      "source_updated_at": "2026-06-18",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "電話相談は匿名利用可。来所相談は必要に応じて案内され、予約制。"
+      ]
+    },
+    {
+      "id": "yokohama-mental-health-phone",
+      "name": "こころの電話相談",
+      "provider_type": "mental_health_phone",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": "045-662-3522",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone"
+      ],
+      "themes": [
+        "mood_anxiety",
+        "family_parent_child",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "young_person",
+        "parent_family",
+        "general_public"
+      ],
+      "target_age": "横浜市在住・在勤・在学の方",
+      "cost": null,
+      "reservation_required": false,
+      "anonymous_available": null,
+      "parent_only_consultation": true,
+      "hours": "平日 17:00–21:30、土日祝日 8:45–21:30",
+      "operator": "横浜市こころの健康相談センター",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/sodancenter/kokorosoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kenko-iryo-fukushi/kenko-iryo/kokoro/sodancenter/kokorosoudan.html",
+      "source_updated_at": "2026-06-09",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": [
+        "相談時間は原則約20分。原則として継続相談には対応しない。"
+      ]
+    },
+    {
+      "id": "yokohama-child-abuse-hotline",
+      "name": "よこはま子ども虐待ホットライン",
+      "provider_type": "child_safety_hotline",
+      "ward_code": null,
+      "ward_name": null,
+      "address": null,
+      "phone": "0120-805-240",
+      "alternate_phone": null,
+      "consultation_methods": [
+        "phone"
+      ],
+      "themes": [
+        "family_parent_child",
+        "other"
+      ],
+      "target_users": [
+        "child",
+        "parent_family",
+        "school_staff",
+        "supporter",
+        "general_public"
+      ],
+      "target_age": "子ども・保護者・周囲の人",
+      "cost": "無料（フリーダイヤル）",
+      "reservation_required": false,
+      "anonymous_available": true,
+      "parent_only_consultation": true,
+      "hours": "24時間365日",
+      "operator": "横浜市",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/DV/gyakutaisoudan.html",
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/DV/gyakutaisoudan.html",
+      "source_updated_at": "2026-04-14",
+      "checked_at": "2026-07-27",
+      "verification_status": "official_source",
+      "notes": []
+    }
+  ],
+  "emergency_resources": [
+    {
+      "id": "emergency-police-110",
+      "label": "事件・事故など、警察の助けが必要な場合",
+      "phone": "110",
+      "availability": "24時間",
+      "cost": null,
+      "anonymous_available": null,
+      "source_url": "https://www.city.yokohama.lg.jp/lang/residents/living-guide/emergency/110-119.html",
+      "checked_at": "2026-07-27",
+      "sort_priority": 10
+    },
+    {
+      "id": "emergency-fire-ambulance-119",
+      "label": "火事・救急車など、消防・救急の助けが必要な場合",
+      "phone": "119",
+      "availability": "24時間",
+      "cost": "通報無料",
+      "anonymous_available": null,
+      "source_url": "https://www.city.yokohama.lg.jp/lang/residents/living-guide/emergency/110-119.html",
+      "checked_at": "2026-07-27",
+      "sort_priority": 20
+    },
+    {
+      "id": "emergency-child-abuse-189",
+      "label": "虐待かもしれないと思った場合",
+      "phone": "189",
+      "availability": "24時間",
+      "cost": "通話料無料",
+      "anonymous_available": true,
+      "source_url": "https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou-dial/",
+      "checked_at": "2026-07-27",
+      "sort_priority": 30
+    },
+    {
+      "id": "emergency-yokohama-child-abuse",
+      "label": "横浜市で、子どもの虐待について相談・通告したい場合",
+      "phone": "0120-805-240",
+      "availability": "24時間365日",
+      "cost": "無料（フリーダイヤル）",
+      "anonymous_available": true,
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/DV/gyakutaisoudan.html",
+      "checked_at": "2026-07-27",
+      "sort_priority": 40
+    },
+    {
+      "id": "emergency-child-sos-24h",
+      "label": "いじめや子どもの悩みを今すぐ相談したい場合",
+      "phone": "0120-078310",
+      "availability": "24時間365日",
+      "cost": "無料（フリーダイヤル）",
+      "anonymous_available": null,
+      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
+      "checked_at": "2026-07-27",
+      "sort_priority": 50
+    }
+  ]
+}
