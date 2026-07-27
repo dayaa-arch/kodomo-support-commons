@@ -104,8 +104,8 @@
 - [x] Issue を参照したコミットを作成して push する
 - [x] テスト/検証結果を記載した PR を作成する
 - [x] CI checks が未設定であることを確認し、ローカルの全品質チェックが green であることを確認する
-- [ ] squash merge し、リモート feature ブランチを削除する
-- [ ] `main` を最新化し、Issue の close を確認する
+- [x] squash merge し、リモート feature ブランチを削除する
+- [x] `main` を最新化し、Issue の close を確認する
 
 ## 完了条件
 
