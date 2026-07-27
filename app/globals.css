@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7fbfe;
+  --foreground: #172534;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Geist", "Hiragino Sans", "Yu Gothic", "Meiryo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-brand-50: #eef8fd;
+  --color-brand-100: #d9edf7;
+  --color-brand-200: #b6dcee;
+  --color-brand-300: #86c3e1;
+  --color-brand-400: #4fa5cf;
+  --color-brand-500: #2d8bbd;
+  --color-brand-600: #1f78aa;
+  --color-brand-700: #166faf;
+  --color-brand-800: #155a89;
+  --color-brand-900: #164b70;
+
+  --color-leaf-50: #f2f9ee;
+  --color-leaf-100: #e1f1d9;
+  --color-leaf-200: #c3e2b4;
+  --color-leaf-600: #568d37;
+  --color-leaf-700: #47772f;
+  --color-leaf-800: #3c622a;
+
+  --color-sun-50: #fff9eb;
+  --color-sun-100: #fff0c5;
+  --color-sun-200: #fadd8a;
+  --color-sun-800: #855519;
+  --color-sun-900: #6c4519;
+
+  --color-violet-50: #f7f4fc;
+  --color-violet-100: #ede7f8;
+  --color-violet-200: #d9cef0;
+  --color-violet-600: #745ab4;
+  --color-violet-800: #543f87;
+  --color-violet-900: #46366d;
+
+  --color-coral-50: #fff5f3;
+  --color-coral-100: #ffe7e3;
+  --color-coral-200: #ffcfc7;
+  --color-coral-300: #f9a99e;
+  --color-coral-600: #d55349;
+  --color-coral-700: #b83d36;
+  --color-coral-800: #96352f;
+  --color-coral-900: #7d332e;
+
+  --color-slate-650: #536878;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Geist", "Hiragino Sans", "Yu Gothic", "Meiryo", ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b6dcee;
+  color: #164b70;
+}
+
+button,
+summary,
+select,
+label[for] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-180%);
+  border-radius: 0.75rem;
+  background: #164b70;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #86c3e1;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
