@@ -67,6 +67,9 @@ export const CONSULTATION_METHOD_LABELS = {
   online: "オンライン",
   email: "メール",
   chat: "チャット",
+  line: "LINE",
+  "web-form": "Webフォーム",
+  "phone-callback": "電話での折り返し",
 } as const;
 
 export type ConsultationMethod = keyof typeof CONSULTATION_METHOD_LABELS;

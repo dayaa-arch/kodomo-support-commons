@@ -88,13 +88,14 @@ export function SearchResultsScreen({
             ) : (
               <div className="rounded-2xl border border-brand-100 bg-white px-5 py-14 text-center shadow-sm">
                 <Icon name="map-pin" className="mx-auto size-10 text-brand-500" />
-                <h2 className="mt-4 text-xl font-black text-slate-950">この条件に合う表示用データはありません</h2>
+                <h2 className="mt-4 text-xl font-black text-slate-950">この条件に合う支援先は見つかりませんでした</h2>
                 <p className="mt-2 text-sm leading-7 text-slate-600">地域や困りごとを変えて、もう一度検索してください。</p>
                 <Button variant="secondary" className="mt-5" onClick={() => setFilterOpen(true)}>条件を変更する</Button>
               </div>
             )}
             <div className="mt-6 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-xs leading-6 text-violet-900">
-              <strong>表示用モック:</strong> この結果はUI確認用の架空データです。実際の相談先情報は今後のステップで掲載します。
+              選んだ区の支援先を先に、区を問わず利用できる市全域の窓口、通いやすい隣接区の支援先を続けて表示しています。
+              掲載内容は公開情報をもとに整理したものです。利用前に公式サイトでご確認ください。
             </div>
           </section>
         </div>

@@ -26,6 +26,10 @@
 | 確認状況 | verificationStatus | 情報の信頼性区分（下記） |
 | 特徴ラベル | featureLabel | 施設属性から派生する表示ラベル |
 | 一致度 | matchScore | 利用者の回答と施設属性の合致度 |
+| 市域全体の窓口 | citywide（`ward: null`） | 特定の区に属さず、市内どこからでも利用できる窓口。表示は「市全域」 |
+| 費用の補足 | costDetail | 出典の費用表現をそのまま保持したもの（例:「無料（利用登録が必要）」） |
+| 補足事項 | notes | 出典に付記された補足（例:「秘密厳守」） |
+| 正本データセット | seed dataset | `data/seed/*.json`。施設・区マスタ・コード辞書・出典カタログを含む唯一の情報源 |
 
 ## 2. 確認状況（verificationStatus）
 
@@ -66,6 +70,9 @@
 | オンライン | `online` |  | 有料 | `paid` |
 | メール | `email` |  | 不明 | `unknown` |
 | チャット | `chat` |  | | |
+| LINE | `line` |  | | |
+| Webフォーム | `web-form` |  | | |
+| 電話での折り返し | `phone-callback` |  | | |
 
 ## 6. 横浜市18区（ward）
 
@@ -95,6 +102,45 @@
 | 緊急時の相談先 | emergencyContacts | 「今すぐ助けが必要な場合」共通セクション |
 | 絞り込み | filter | 結果画面の条件変更・再検索 UI |
 
-## 8. プロジェクト名称
+## 8. 正本データセットのコード値 ↔ ドメイン値
+
+正本 JSON（`data/seed/*.json`）はスネークケースの独自コード値を持つ。`infrastructure` の境界（`seed-mapper.ts`）で下表のとおりドメイン値へ写像し、`domain` / `application` には正本の値を渡さない。
+
+### 困りごとテーマ
+
+| 正本 | ドメイン |
+| --- | --- |
+| `school_attendance` | `school-absence` |
+| `mood_anxiety` | `low-mood` |
+| `family_parent_child` | `family` |
+| `bullying_friendship` | `bullying` |
+| `living_financial` | `livelihood` |
+| `caregiving_young_carer` | `caregiving` |
+| `other` | `other` |
+
+### 対象者
+
+| 正本 | ドメイン | 備考 |
+| --- | --- | --- |
+| `child` | `child` | |
+| `parent_family` | `guardian` | |
+| `school_staff` | `school` | |
+| `supporter` | `supporter` | |
+| `young_person` | `child` | 若者本人は Q1 の「子ども本人」に寄せる |
+| `general_public` | `other` | |
+
+### 相談方法・確認状況・費用
+
+| 種別 | 正本 | ドメイン |
+| --- | --- | --- |
+| 相談方法 | `in_person` | `inperson` |
+| 相談方法 | `line` / `web_form` / `phone_callback` | `line` / `web-form` / `phone-callback` |
+| 確認状況 | `operator_verified` / `official_source` / `unverified` | `operator-verified` / `official-verified` / `unverified` |
+| 費用 | `null` / 「無料」を含む文字列 | `unknown` / `free`（原文は `costDetail` に保持） |
+| 区 | `ward_code: null` | `ward: null`（市域全体の窓口） |
+
+> 正本に未知のコード値が現れた場合は、黙って捨てずスキーマ検証エラーとする（`seed-schema.ts`）。
+
+## 9. プロジェクト名称
 
 - 正式名称: **よこはま支援さがし**（英語表記の暫定: Yokohama Support Finder）。リポジトリ名: `kodomo-support-commons`。

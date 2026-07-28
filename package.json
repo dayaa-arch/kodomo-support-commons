@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/modules/facility/domain/derive-feature-labels.test.ts src/modules/search/domain/search-answers.test.ts src/modules/search/domain/search-facilities.test.ts src/shared/domain/wards.test.ts"
+    "test": "node --test src/modules/facility/domain/derive-feature-labels.test.ts src/modules/facility/infrastructure/seed-schema.test.ts src/modules/facility/infrastructure/seed-mapper.test.ts src/modules/facility/infrastructure/seed-dataset.test.ts src/modules/search/domain/search-answers.test.ts src/modules/search/domain/search-facilities.test.ts src/shared/domain/wards.test.ts"
   },
   "dependencies": {
     "next": "16.2.12",

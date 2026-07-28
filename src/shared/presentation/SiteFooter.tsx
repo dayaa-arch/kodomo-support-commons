@@ -10,7 +10,7 @@ export function SiteFooter() {
           <BrandMark />
           <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600">
             横浜市内の子ども・家庭向け支援情報を、探しやすく、比べやすく。
-            現在はUI確認用のモックデータで表示しています。
+            掲載情報は公開情報をもとに整理し、出典と最終確認日を明示しています。
           </p>
         </div>
         <nav aria-label="フッターナビゲーション">

@@ -2,7 +2,7 @@ import {
   CONSULTATION_METHOD_LABELS,
 } from "@/src/shared/domain/support-taxonomy";
 import type { ReactNode } from "react";
-import { getWardLabel } from "@/src/shared/domain/wards";
+import { getWardOrCitywideLabel } from "@/src/shared/domain/wards";
 import { Breadcrumbs } from "@/src/shared/presentation/Breadcrumbs";
 import { EmergencyContacts } from "@/src/shared/presentation/EmergencyContacts";
 import { Icon } from "@/src/shared/presentation/Icon";
@@ -27,6 +27,19 @@ function formatBoolean(
     return UNPUBLISHED_INFORMATION_LABEL;
   }
   return value ? positive : negative;
+}
+
+/** 運営部署と運営主体を、欠けている側を補わずに連結する。 */
+function formatOperator(facility: Facility): string {
+  const parts = [facility.operatingDepartment, facility.operator].filter(
+    (part): part is string => Boolean(part?.trim()),
+  );
+  return parts.length > 0 ? parts.join(" / ") : UNPUBLISHED_INFORMATION_LABEL;
+}
+
+/** 費用は出典の表現（例:「無料（利用登録が必要）」）を優先して見せる。 */
+function formatCost(facility: Facility): string {
+  return facility.costDetail?.trim() ? facility.costDetail : COST_LABELS[facility.cost];
 }
 
 function DetailRow({
@@ -62,17 +75,16 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
           <div className="grid items-center gap-6 p-5 sm:p-8 lg:grid-cols-[1.15fr_.85fr]">
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <Tag tone="gray">表示用モックデータ</Tag>
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-500"><Icon name="map-pin" className="size-4" />{getWardLabel(facility.ward)}</span>
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-slate-500"><Icon name="map-pin" className="size-4" />{getWardOrCitywideLabel(facility.ward)}</span>
               </div>
               <h1 className="mt-4 text-3xl font-black leading-tight tracking-tight text-slate-950 sm:text-4xl">{facility.name}</h1>
-              <p className="mt-2 font-bold text-slate-600">{formatOptionalInformation(facility.operatingDepartment)} / {facility.operator}</p>
+              <p className="mt-2 font-bold text-slate-600">{formatOperator(facility)}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {featureLabels.map((feature) => (
                   <Tag key={feature.label} tone={feature.tone}>{feature.label}</Tag>
                 ))}
               </div>
-              <p className="mt-6 text-base leading-8 text-slate-700">{facility.summary}</p>
+              <p className="mt-6 text-base leading-8 text-slate-700">{formatOptionalInformation(facility.summary)}</p>
             </div>
             <SupportIllustration variant={facility.imageVariant} className="w-full" />
           </div>
@@ -82,12 +94,31 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
             <DetailRow label="誰が利用できるか">{formatOptionalInformation(facility.whoCanUse)}</DetailRow>
             <DetailRow label="利用までの流れ">{formatOptionalInformation(facility.howToUse)}</DetailRow>
             <DetailRow label="相談方法">{facility.consultationMethods.map((method) => CONSULTATION_METHOD_LABELS[method]).join(" / ")}</DetailRow>
-            <DetailRow label="費用">{COST_LABELS[facility.cost]}</DetailRow>
+            <DetailRow label="電話番号">
+              {facility.phone ? (
+                <span className="font-bold text-slate-900">
+                  {[facility.phone, facility.alternatePhone].filter(Boolean).join(" / ")}
+                </span>
+              ) : (
+                UNPUBLISHED_INFORMATION_LABEL
+              )}
+            </DetailRow>
+            <DetailRow label="所在地">{formatOptionalInformation(facility.address)}</DetailRow>
+            <DetailRow label="費用">{formatCost(facility)}</DetailRow>
             <DetailRow label="利用条件">{formatOptionalInformation(facility.eligibility)}</DetailRow>
             <DetailRow label="予約">{formatBoolean(facility.reservationRequired, "予約が必要です", "予約なしでも相談できます")}</DetailRow>
             <DetailRow label="匿名相談">{formatBoolean(facility.anonymousConsultation, "匿名で相談できます", "匿名での相談はできません")}</DetailRow>
             <DetailRow label="保護者のみの相談">{formatBoolean(facility.guardianOnlyConsultation, "保護者だけでも相談できます", "子ども本人と一緒の相談が必要です")}</DetailRow>
             <DetailRow label="受付時間">{formatOptionalInformation(facility.receptionHours)}</DetailRow>
+            {facility.notes.length > 0 ? (
+              <DetailRow label="補足">
+                <ul className="list-disc space-y-1 pl-5">
+                  {facility.notes.map((note) => (
+                    <li key={note}>{note}</li>
+                  ))}
+                </ul>
+              </DetailRow>
+            ) : null}
             <DetailRow label="情報の出典">
               {facility.sourceUrl ? (
                 <a className="inline-flex items-center gap-1 font-bold text-brand-700 underline underline-offset-4" href={facility.sourceUrl} target="_blank" rel="noopener noreferrer">
@@ -108,7 +139,8 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              公式サイトを見る（デモ）<Icon name="external-link" className="size-4" />
+              公式サイトを見る<Icon name="external-link" className="size-4" />
+              <span className="sr-only">（新しいタブで開きます）</span>
             </a>
           ) : null}
           <button
@@ -122,7 +154,8 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
         </div>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-xs leading-6 text-slate-500">
-          このページはUI確認用のモックです。施設名・受付時間・リンク先は実運用情報ではありません。
+          掲載内容は公開情報をもとに整理したものです。受付時間や条件は変更される場合があるため、
+          利用前に公式サイトまたは電話でご確認ください。
         </p>
 
         <div className="mt-8"><EmergencyContacts /></div>
