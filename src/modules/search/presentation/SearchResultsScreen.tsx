@@ -53,7 +53,7 @@ export function SearchResultsScreen({
             <p className="text-sm font-black text-brand-700">あなたに合いそうな支援先</p>
             <h1 id="search-results-heading" className="mt-1 text-3xl font-black text-slate-950">検索結果 {results.length}件</h1>
           </div>
-          <Button variant="secondary" className="lg:hidden" aria-expanded={filterOpen} aria-controls="search-filters" onClick={() => setFilterOpen((current) => !current)}>
+          <Button variant="secondary" className="md:hidden" aria-expanded={filterOpen} aria-controls="search-filters" onClick={() => setFilterOpen((current) => !current)}>
             <Icon name="search" className="size-4" />条件を変更する<Icon name="chevron-down" className={`size-4 transition ${filterOpen ? "rotate-180" : ""}`} />
           </Button>
         </div>
@@ -62,11 +62,19 @@ export function SearchResultsScreen({
           <p className="text-sm leading-7 text-sun-900">
             <strong>{getTargetAudienceLabel(answers.targetAudience)}</strong>のために、<strong>{getWardLabel(answers.ward)}</strong>周辺で、<strong>{getSupportThemeLabel(answers.supportTheme)}</strong>について探しています。
           </p>
-          <button type="button" onClick={() => setFilterOpen(true)} className="mt-2 inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg px-2 text-xs font-black text-brand-700 underline underline-offset-4 sm:mt-0 lg:hidden">条件を変更する<Icon name="arrow-right" className="size-4" /></button>
+          <button type="button" onClick={() => setFilterOpen(true)} className="mt-2 inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg px-2 text-xs font-black text-brand-700 underline underline-offset-4 sm:mt-0 md:hidden">条件を変更する<Icon name="arrow-right" className="size-4" /></button>
         </div>
 
-        <div className="mt-6 grid items-start gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
-          <aside id="search-filters" className={`${filterOpen ? "block" : "hidden"} lg:sticky lg:top-24 lg:block`}>
+        <div className="mt-6 grid grid-cols-1 items-start gap-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)]">
+          {/*
+            md 以上は常時表示のサイドバー、md 未満は折りたたみ。
+            hidden と block を同じ要素で競合させると CSS の出力順に依存して崩れるため、
+            折りたたみは max-md（md 未満）に限定して指定する。
+          */}
+          <aside
+            id="search-filters"
+            className={`md:sticky md:top-24 md:block ${filterOpen ? "block" : "max-md:hidden"}`}
+          >
             <FilterPanel
               filters={filters}
               onChange={setFilters}
