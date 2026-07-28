@@ -21,6 +21,17 @@ export const WARD_OPTIONS = [
 
 export type Ward = (typeof WARD_OPTIONS)[number]["value"];
 
+/** 区に属さない市域全体の窓口を表示するときのラベル。 */
+export const CITYWIDE_LABEL = "市全域";
+
+/**
+ * 区の隣接関係（暫定マスタ）。
+ *
+ * 正本データセット（data/seed/*.json）は `ward_adjacency: not_included` として
+ * 隣接関係を持たない（行政区境界の公式地理データによる検証が未了のため）。
+ * ここでは通いやすさの目安として暫定値を保持しており、公式地理データでの検証は
+ * Step 4 の課題とする。
+ */
 export const ADJACENT_WARDS: Readonly<Record<Ward, readonly Ward[]>> = {
   tsurumi: ["kohoku", "kanagawa"],
   kanagawa: ["tsurumi", "kohoku", "midori", "hodogaya", "nishi"],
@@ -48,4 +59,9 @@ export function getWardLabel(ward: Ward): string {
 
 export function isAdjacentWard(selectedWard: Ward, candidateWard: Ward): boolean {
   return ADJACENT_WARDS[selectedWard].includes(candidateWard);
+}
+
+/** 区、または区に属さない市域全体の窓口の表示ラベル。 */
+export function getWardOrCitywideLabel(ward: Ward | null): string {
+  return ward === null ? CITYWIDE_LABEL : getWardLabel(ward);
 }

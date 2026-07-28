@@ -17,7 +17,7 @@
 - ドメイン駆動 × レイヤード（モジュラモノリス）: `src/modules/<domain>/{domain,application,infrastructure,presentation}` ＋ `src/shared/`。`app/**` は薄いルーティング層。
 - 依存方向は一方向（`app → presentation → application → domain`）。ポートは `application/ports` に定義し `infrastructure` で実装、`composition-root` で注入（DIP）。詳細は [`docs/architecture.md`](docs/architecture.md) / [`docs/repository-structure.md`](docs/repository-structure.md)。
 - **プライバシー最優先**: 検索条件を URL/Cookie/Storage/サーバに保存しない。行動追跡・セッションリプレイなし。外部送信はアクセス解析2種（詳細閲覧数・公式クリック数）のみ。
-- 施設情報の正本は `data/facilities/*.yaml`（PR で更新、公開前レビュー必須）。DB・管理画面は MVP では持たない。
+- 施設情報の正本は `data/seed/*.json`（データセット単位の JSON。PR で更新、公開前レビュー必須）。正本のコード値は `facility/infrastructure` の境界でドメイン値へ写像する。DB・管理画面は MVP では持たない。
 
 ## ステアリング規則（作業単位ドキュメント）
 

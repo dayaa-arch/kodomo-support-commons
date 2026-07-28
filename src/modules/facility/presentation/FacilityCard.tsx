@@ -4,15 +4,30 @@ import {
   CONSULTATION_METHOD_LABELS,
   getTargetAudienceLabel,
 } from "@/src/shared/domain/support-taxonomy";
-import { getWardLabel } from "@/src/shared/domain/wards";
+import { getWardOrCitywideLabel } from "@/src/shared/domain/wards";
 import { Icon } from "@/src/shared/presentation/Icon";
 import { Tag } from "@/src/shared/presentation/Tag";
 
 import {
   COST_LABELS,
   deriveFeatureLabels,
+  formatOptionalInformation,
   type Facility,
 } from "../index";
+
+/**
+ * 所在地の観点でどう合致したか。
+ * search ドメインの LocationMatch と同じ値を、モジュール間の直接依存を避けて受け取る。
+ */
+type CardLocationMatch = "selected" | "citywide" | "adjacent";
+
+const LOCATION_MATCH_TAGS: Readonly<
+  Record<CardLocationMatch, { readonly label: string; readonly tone: "blue" | "green" | "gray" }>
+> = {
+  selected: { label: "選択した区", tone: "blue" },
+  citywide: { label: "市全域から利用可", tone: "green" },
+  adjacent: { label: "隣接区", tone: "gray" },
+};
 
 export function FacilityCard({
   facility,
@@ -21,9 +36,10 @@ export function FacilityCard({
 }: {
   readonly facility: Facility;
   readonly rank: number;
-  readonly locationMatch: "selected" | "adjacent";
+  readonly locationMatch: CardLocationMatch;
 }) {
   const featureLabels = deriveFeatureLabels(facility).slice(0, 4);
+  const locationTag = LOCATION_MATCH_TAGS[locationMatch];
 
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-[0_5px_20px_rgba(29,85,119,0.08)] transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-[0_12px_30px_rgba(29,85,119,0.13)]">
@@ -42,22 +58,24 @@ export function FacilityCard({
                   {facility.name}
                 </Link>
               </h2>
-              <Tag tone={locationMatch === "selected" ? "blue" : "gray"}>
-                {locationMatch === "selected" ? "選択した区" : "隣接区"}
-              </Tag>
+              <Tag tone={locationTag.tone}>{locationTag.label}</Tag>
             </div>
-            <p className="mt-1 text-xs font-bold text-slate-500">{facility.operator}</p>
+            <p className="mt-1 text-xs font-bold text-slate-500">
+              {formatOptionalInformation(facility.operator)}
+            </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-x-4 gap-y-2 text-xs font-bold text-slate-600 sm:flex-col sm:gap-2">
-            <span className="inline-flex items-center gap-1.5"><Icon name="map-pin" className="size-4 text-brand-600" />{getWardLabel(facility.ward)}</span>
+            <span className="inline-flex items-center gap-1.5"><Icon name="map-pin" className="size-4 text-brand-600" />{getWardOrCitywideLabel(facility.ward)}</span>
             <span className="inline-flex items-center gap-1.5"><Icon name="chat" className="size-4 text-brand-600" />{facility.consultationMethods.map((method) => CONSULTATION_METHOD_LABELS[method]).join(" / ")}</span>
           </div>
         </div>
 
-        <p className="mt-4 text-sm leading-7 text-slate-650">{facility.summary}</p>
+        <p className="mt-4 text-sm leading-7 text-slate-650">
+          {formatOptionalInformation(facility.summary)}
+        </p>
 
         <dl className="mt-4 grid gap-2 rounded-xl bg-slate-50 p-3 text-xs sm:grid-cols-2">
-          <div className="flex gap-2"><dt className="shrink-0 font-black text-slate-500">費用</dt><dd className="font-bold text-slate-800">{COST_LABELS[facility.cost]}</dd></div>
+          <div className="flex gap-2"><dt className="shrink-0 font-black text-slate-500">費用</dt><dd className="font-bold text-slate-800">{facility.costDetail ?? COST_LABELS[facility.cost]}</dd></div>
           <div className="flex gap-2"><dt className="shrink-0 font-black text-slate-500">主な対象</dt><dd className="font-bold text-slate-800">{facility.targetAudiences.slice(0, 2).map(getTargetAudienceLabel).join("・")}</dd></div>
         </dl>
 

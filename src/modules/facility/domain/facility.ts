@@ -27,10 +27,14 @@ export type FacilityImageVariant = "conversation" | "community" | "learning";
 export interface Facility {
   readonly slug: string;
   readonly name: string;
-  readonly operator: string;
+  readonly operator: string | null;
   readonly operatingDepartment: string | null;
-  readonly summary: string;
-  readonly ward: Ward;
+  readonly summary: string | null;
+  /** null は特定の区に属さない市域全体の窓口を表す。 */
+  readonly ward: Ward | null;
+  readonly address: string | null;
+  readonly phone: string | null;
+  readonly alternatePhone: string | null;
   readonly supportThemes: readonly SupportTheme[];
   readonly targetAudiences: readonly TargetAudience[];
   readonly whatYouCanConsult: string | null;
@@ -39,14 +43,22 @@ export interface Facility {
   readonly howToUse: string | null;
   readonly consultationMethods: readonly ConsultationMethod[];
   readonly cost: Cost;
+  /** 費用の補足（例: 「無料（利用登録が必要）」）。出典の表現をそのまま保持する。 */
+  readonly costDetail: string | null;
   readonly reservationRequired: boolean | null;
   readonly anonymousConsultation: boolean | null;
   readonly guardianOnlyConsultation: boolean | null;
   readonly receptionHours: string | null;
   readonly officialUrl: string | null;
   readonly imageVariant: FacilityImageVariant;
+  readonly notes: readonly string[];
   readonly sourceName: string;
   readonly sourceUrl: string | null;
   readonly lastCheckedAt: string;
   readonly verificationStatus: VerificationStatus;
+}
+
+/** 特定の区に属さず、市域全体を対象とする窓口かどうか。 */
+export function isCitywideFacility(facility: Facility): boolean {
+  return facility.ward === null;
 }

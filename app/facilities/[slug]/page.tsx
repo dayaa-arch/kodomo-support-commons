@@ -30,7 +30,7 @@ export async function generateMetadata({
 
   return {
     title: facility.name,
-    description: facility.summary,
+    description: facility.summary ?? undefined,
   };
 }
 
