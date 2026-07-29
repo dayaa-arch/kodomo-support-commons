@@ -2,6 +2,8 @@ import {
   CONSULTATION_METHOD_LABELS,
 } from "@/src/shared/domain/support-taxonomy";
 import type { ReactNode } from "react";
+import { toTelHref } from "@/src/shared/domain/phone";
+import { INFORMATION_REPORT_FORM_URL } from "@/src/shared/domain/external-links";
 import { getWardOrCitywideLabel } from "@/src/shared/domain/wards";
 import { Breadcrumbs } from "@/src/shared/presentation/Breadcrumbs";
 import { EmergencyContacts } from "@/src/shared/presentation/EmergencyContacts";
@@ -91,8 +93,20 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
             <DetailRow label="相談方法">{facility.consultationMethods.map((method) => CONSULTATION_METHOD_LABELS[method]).join(" / ")}</DetailRow>
             {facility.phone ? (
               <DetailRow label="電話番号">
-                <span className="font-bold text-slate-900">
-                  {[facility.phone, facility.alternatePhone].filter(Boolean).join(" / ")}
+                <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  {[facility.phone, facility.alternatePhone]
+                    .filter((phone): phone is string => Boolean(phone))
+                    .map((phone) => (
+                      <a
+                        key={phone}
+                        href={toTelHref(phone)}
+                        className="inline-flex min-h-10 items-center gap-1.5 font-black text-brand-700 underline underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200"
+                      >
+                        <Icon name="phone" className="size-4 shrink-0" />
+                        {phone}
+                        <span className="sr-only">に電話をかける</span>
+                      </a>
+                    ))}
                 </span>
               </DetailRow>
             ) : null}
@@ -161,14 +175,16 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
               <span className="sr-only">（新しいタブで開きます）</span>
             </a>
           ) : null}
-          <button
-            type="button"
-            disabled
-            title="報告の受け付けはまもなく開始します。それまでは公式サイトの連絡先をご利用ください。"
-            className="inline-flex min-h-12 cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-brand-300 bg-white px-6 py-3 font-black text-brand-700 opacity-70"
+          <a
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-300 bg-white px-6 py-3 font-black text-brand-700 transition hover:border-brand-500 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200"
+            href={INFORMATION_REPORT_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Icon name="chat" className="size-4" />この情報が古い場合は知らせる（準備中）
-          </button>
+            <Icon name="chat" className="size-4" />この情報が古い場合は知らせる
+            <Icon name="external-link" className="size-4" />
+            <span className="sr-only">（Googleフォームを新しいタブで開きます）</span>
+          </a>
         </div>
 
         <p className="mx-auto mt-4 max-w-3xl text-center text-xs leading-6 text-slate-500">
