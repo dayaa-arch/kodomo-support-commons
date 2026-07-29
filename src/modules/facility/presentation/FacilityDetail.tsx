@@ -10,24 +10,11 @@ import { SupportIllustration } from "@/src/shared/presentation/SupportIllustrati
 import { Tag } from "@/src/shared/presentation/Tag";
 
 import {
-  COST_LABELS,
-  VERIFICATION_STATUS_LABELS,
+  collectUnpublishedFields,
   deriveFeatureLabels,
-  formatOptionalInformation,
   UNPUBLISHED_INFORMATION_LABEL,
   type Facility,
 } from "../index";
-
-function formatBoolean(
-  value: boolean | null,
-  positive: string,
-  negative: string,
-): string {
-  if (value === null) {
-    return UNPUBLISHED_INFORMATION_LABEL;
-  }
-  return value ? positive : negative;
-}
 
 /** 運営部署と運営主体を、欠けている側を補わずに連結する。 */
 function formatOperator(facility: Facility): string {
@@ -35,11 +22,6 @@ function formatOperator(facility: Facility): string {
     (part): part is string => Boolean(part?.trim()),
   );
   return parts.length > 0 ? parts.join(" / ") : UNPUBLISHED_INFORMATION_LABEL;
-}
-
-/** 費用は出典の表現（例:「無料（利用登録が必要）」）を優先して見せる。 */
-function formatCost(facility: Facility): string {
-  return facility.costDetail?.trim() ? facility.costDetail : COST_LABELS[facility.cost];
 }
 
 function DetailRow({
@@ -59,6 +41,7 @@ function DetailRow({
 
 export function FacilityDetail({ facility }: { readonly facility: Facility }) {
   const featureLabels = deriveFeatureLabels(facility);
+  const unpublishedFields = collectUnpublishedFields(facility);
 
   return (
     <div className="bg-[linear-gradient(180deg,#f7fbfe_0%,#fff_42%)]">
@@ -84,32 +67,44 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
                   <Tag key={feature.label} tone={feature.tone}>{feature.label}</Tag>
                 ))}
               </div>
-              <p className="mt-6 text-base leading-8 text-slate-700">{formatOptionalInformation(facility.summary)}</p>
+              {facility.summary ? (
+                <p className="mt-6 text-base leading-8 text-slate-700">{facility.summary}</p>
+              ) : null}
             </div>
             <SupportIllustration variant={facility.imageVariant} className="w-full" />
           </div>
 
           <dl className="border-t border-brand-100 text-sm sm:text-base">
-            <DetailRow label="何を相談できるか">{formatOptionalInformation(facility.whatYouCanConsult)}</DetailRow>
-            <DetailRow label="誰が利用できるか">{formatOptionalInformation(facility.whoCanUse)}</DetailRow>
-            <DetailRow label="利用までの流れ">{formatOptionalInformation(facility.howToUse)}</DetailRow>
+            {/*
+              上部の特徴ラベルに出した項目（費用・予約・匿名相談・保護者のみの相談・確認状況）は
+              ここでは繰り返さない。値が無い項目は末尾の「公式サイトで確認が必要な項目」に集約する。
+            */}
+            {facility.whatYouCanConsult ? (
+              <DetailRow label="何を相談できるか">{facility.whatYouCanConsult}</DetailRow>
+            ) : null}
+            {facility.whoCanUse ? (
+              <DetailRow label="誰が利用できるか">{facility.whoCanUse}</DetailRow>
+            ) : null}
+            {facility.howToUse ? (
+              <DetailRow label="利用までの流れ">{facility.howToUse}</DetailRow>
+            ) : null}
             <DetailRow label="相談方法">{facility.consultationMethods.map((method) => CONSULTATION_METHOD_LABELS[method]).join(" / ")}</DetailRow>
-            <DetailRow label="電話番号">
-              {facility.phone ? (
+            {facility.phone ? (
+              <DetailRow label="電話番号">
                 <span className="font-bold text-slate-900">
                   {[facility.phone, facility.alternatePhone].filter(Boolean).join(" / ")}
                 </span>
-              ) : (
-                UNPUBLISHED_INFORMATION_LABEL
-              )}
-            </DetailRow>
-            <DetailRow label="所在地">{formatOptionalInformation(facility.address)}</DetailRow>
-            <DetailRow label="費用">{formatCost(facility)}</DetailRow>
-            <DetailRow label="利用条件">{formatOptionalInformation(facility.eligibility)}</DetailRow>
-            <DetailRow label="予約">{formatBoolean(facility.reservationRequired, "予約が必要です", "予約なしでも相談できます")}</DetailRow>
-            <DetailRow label="匿名相談">{formatBoolean(facility.anonymousConsultation, "匿名で相談できます", "匿名での相談はできません")}</DetailRow>
-            <DetailRow label="保護者のみの相談">{formatBoolean(facility.guardianOnlyConsultation, "保護者だけでも相談できます", "子ども本人と一緒の相談が必要です")}</DetailRow>
-            <DetailRow label="受付時間">{formatOptionalInformation(facility.receptionHours)}</DetailRow>
+              </DetailRow>
+            ) : null}
+            {facility.address ? (
+              <DetailRow label="所在地">{facility.address}</DetailRow>
+            ) : null}
+            {facility.eligibility ? (
+              <DetailRow label="利用条件">{facility.eligibility}</DetailRow>
+            ) : null}
+            {facility.receptionHours ? (
+              <DetailRow label="受付時間">{facility.receptionHours}</DetailRow>
+            ) : null}
             {facility.notes.length > 0 ? (
               <DetailRow label="補足">
                 <ul className="list-disc space-y-1 pl-5">
@@ -127,8 +122,31 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
               ) : facility.sourceName}
             </DetailRow>
             <DetailRow label="最終確認日">{facility.lastCheckedAt}</DetailRow>
-            <DetailRow label="確認状況">{VERIFICATION_STATUS_LABELS[facility.verificationStatus]}</DetailRow>
           </dl>
+
+          {unpublishedFields.length > 0 ? (
+            <section
+              aria-labelledby="unpublished-heading"
+              className="border-t border-brand-100 bg-slate-50 px-4 py-5 sm:px-5"
+            >
+              <h2 id="unpublished-heading" className="font-black text-slate-900">
+                公式サイトで確認が必要な項目
+              </h2>
+              <p className="mt-1 text-sm leading-7 text-slate-600">
+                次の項目は公開情報で確認できませんでした。推測で補わずそのまま掲載しています。
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {unpublishedFields.map((field) => (
+                  <li
+                    key={field}
+                    className="rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-600"
+                  >
+                    {field}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
 
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
@@ -146,7 +164,7 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
           <button
             type="button"
             disabled
-            title="Step 3で接続します"
+            title="報告の受け付けはまもなく開始します。それまでは公式サイトの連絡先をご利用ください。"
             className="inline-flex min-h-12 cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-brand-300 bg-white px-6 py-3 font-black text-brand-700 opacity-70"
           >
             <Icon name="chat" className="size-4" />この情報が古い場合は知らせる（準備中）

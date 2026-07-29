@@ -3,8 +3,8 @@ import { SupportIllustration } from "./SupportIllustration";
 
 const finderSteps: readonly [IconName, string, string][] = [
   ["user", "誰のために", "立場に合う情報へ"],
-  ["heart", "どんな困りごと", "一番気になることから"],
-  ["map-pin", "どの地域で", "選んだ区と隣接区を表示"],
+  ["help-circle", "困っていること", "いちばん困っていることを1つ"],
+  ["map-pin", "どの地域で", "選んだ区・市全域・隣接区を表示"],
 ];
 
 export function HomeIntro() {
@@ -14,15 +14,15 @@ export function HomeIntro() {
         <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.02fr_.98fr] lg:px-8 lg:py-20">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-leaf-200 bg-white px-3 py-1.5 text-xs font-black text-leaf-800 shadow-sm">
-              <Icon name="sparkles" className="size-4" />
+              <Icon name="check" className="size-4" />
               3問で、自分に合う支援先へ
             </span>
             <h1 className="mt-5 text-3xl font-black leading-[1.35] tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
-              困りごとに合う支援先を
-              <span className="block text-brand-700">ひとりで抱え込む前に。</span>
+              ひとりで抱え込む前に、
+              <span className="block text-brand-700">困りごとに合う支援先を。</span>
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-650 sm:text-lg">
-              不登校や学校に行きづらい気持ち、家族の悩みを、安心して相談できる場所から探せます。検索内容は保存されません。
+              不登校や学校に行きづらい気持ち、家族の悩みを、安心して相談できる場所から探せます。
             </p>
             <a
               href="#finder"

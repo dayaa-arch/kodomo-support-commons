@@ -16,3 +16,4 @@ export {
   type FeatureLabel,
   type FeatureLabelTone,
 } from "./domain/derive-feature-labels";
+export { collectUnpublishedFields } from "./domain/unpublished-fields";

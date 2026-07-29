@@ -1,15 +1,11 @@
 import Link from "next/link";
 
-import {
-  CONSULTATION_METHOD_LABELS,
-  getTargetAudienceLabel,
-} from "@/src/shared/domain/support-taxonomy";
+import { CONSULTATION_METHOD_LABELS } from "@/src/shared/domain/support-taxonomy";
 import { getWardOrCitywideLabel } from "@/src/shared/domain/wards";
 import { Icon } from "@/src/shared/presentation/Icon";
 import { Tag } from "@/src/shared/presentation/Tag";
 
 import {
-  COST_LABELS,
   deriveFeatureLabels,
   formatOptionalInformation,
   type Facility,
@@ -40,6 +36,9 @@ export function FacilityCard({
 }) {
   const featureLabels = deriveFeatureLabels(facility).slice(0, 4);
   const locationTag = LOCATION_MATCH_TAGS[locationMatch];
+  // 概要が未登録の間は、出典で確認できている対象年齢を手がかりとして見せる。
+  // どちらも無いときは「情報がありません」と書かず、行そのものを出さない。
+  const description = facility.summary?.trim() || facility.whoCanUse?.trim() || null;
 
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-[0_5px_20px_rgba(29,85,119,0.08)] transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-[0_12px_30px_rgba(29,85,119,0.13)]">
@@ -70,14 +69,9 @@ export function FacilityCard({
           </div>
         </div>
 
-        <p className="mt-4 text-sm leading-7 text-slate-650">
-          {formatOptionalInformation(facility.summary)}
-        </p>
-
-        <dl className="mt-4 grid gap-2 rounded-xl bg-slate-50 p-3 text-xs sm:grid-cols-2">
-          <div className="flex gap-2"><dt className="shrink-0 font-black text-slate-500">費用</dt><dd className="font-bold text-slate-800">{facility.costDetail ?? COST_LABELS[facility.cost]}</dd></div>
-          <div className="flex gap-2"><dt className="shrink-0 font-black text-slate-500">主な対象</dt><dd className="font-bold text-slate-800">{facility.targetAudiences.slice(0, 2).map(getTargetAudienceLabel).join("・")}</dd></div>
-        </dl>
+        {description ? (
+          <p className="mt-4 text-sm leading-7 text-slate-650">{description}</p>
+        ) : null}
 
         <div className="mt-4 flex flex-wrap gap-2">
           {featureLabels.map((feature) => (

@@ -54,6 +54,31 @@ test("施設の事実から表示ラベルを導出する", () => {
   );
 });
 
+test("費用が確認できていないときは特徴ラベルに出さない", () => {
+  const labels = deriveFeatureLabels({
+    ...baseFacility,
+    cost: "unknown",
+    costDetail: null,
+  }).map(({ label }) => label);
+
+  assert.ok(!labels.includes("公式サイトで確認してください"));
+  assert.deepEqual(labels, [
+    "保護者だけでも相談可",
+    "予約不要",
+    "匿名相談可",
+    "公式情報確認済み",
+  ]);
+});
+
+test("費用の表現は出典の原文を優先する", () => {
+  const labels = deriveFeatureLabels({
+    ...baseFacility,
+    costDetail: "無料（利用登録が必要）",
+  }).map(({ label }) => label);
+
+  assert.equal(labels[0], "無料（利用登録が必要）");
+});
+
 test("未掲載の任意情報は共通の案内文へ変換する", () => {
   assert.equal(formatOptionalInformation(null), UNPUBLISHED_INFORMATION_LABEL);
   assert.equal(formatOptionalInformation("   "), UNPUBLISHED_INFORMATION_LABEL);
