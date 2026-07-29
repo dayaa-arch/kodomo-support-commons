@@ -58,11 +58,11 @@ export function SearchResultsScreen({
           </Button>
         </div>
 
-        <div className="mt-5 rounded-2xl border border-sun-200 bg-sun-50 p-4 sm:flex sm:items-center sm:justify-between sm:gap-4">
+        {/* 条件変更の導線は見出し横のボタン（md 未満）とサイドバー（md 以上）に集約し、ここでは重ねない。 */}
+        <div className="mt-5 rounded-2xl border border-sun-200 bg-sun-50 p-4">
           <p className="text-sm leading-7 text-sun-900">
             <strong>{getTargetAudienceLabel(answers.targetAudience)}</strong>のために、<strong>{getWardLabel(answers.ward)}</strong>周辺で、<strong>{getSupportThemeLabel(answers.supportTheme)}</strong>について探しています。
           </p>
-          <button type="button" onClick={() => setFilterOpen(true)} className="mt-2 inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg px-2 text-xs font-black text-brand-700 underline underline-offset-4 sm:mt-0 md:hidden">条件を変更する<Icon name="arrow-right" className="size-4" /></button>
         </div>
 
         <div className="mt-6 grid grid-cols-1 items-start gap-6 md:grid-cols-[16rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)]">

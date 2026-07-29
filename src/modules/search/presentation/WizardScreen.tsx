@@ -19,22 +19,26 @@ import {
 } from "../domain/search-answers";
 import { useSearchSession } from "./SearchSessionProvider";
 
+/**
+ * 選択肢のアイコン。Q1 と Q2 は続けて表示されるため、
+ * 同じ絵が別の意味で現れないよう「その他」以外は重複させない。
+ */
 const audienceIcons: Record<string, IconName> = {
   child: "user",
   guardian: "family",
   school: "school",
-  supporter: "users",
-  other: "sparkles",
+  supporter: "hand-heart",
+  other: "dots",
 };
 
 const themeIcons: Record<string, IconName> = {
-  "school-absence": "school",
-  "low-mood": "heart",
-  family: "family",
+  "school-absence": "backpack",
+  "low-mood": "cloud-rain",
+  family: "home",
   bullying: "users",
-  livelihood: "home",
-  caregiving: "shield-check",
-  other: "sparkles",
+  livelihood: "coins",
+  caregiving: "heart",
+  other: "dots",
 };
 
 function ChoiceCard({
@@ -111,19 +115,20 @@ export function WizardScreen() {
 
   const question = {
     1: {
-      eyebrow: "まず、あなたの立場を教えてください",
+      eyebrow: "まず、どなたのために探すかを教えてください",
       title: "どなたのための支援を探していますか？",
       description: "選んだ立場に合わせて、見やすい情報を優先します。",
     },
     2: {
-      eyebrow: "いちばん気になることを1つ",
+      eyebrow: "いちばん困っていることを1つ",
       title: "どんなことで困っていますか？",
-      description: "今もっとも相談したいことに近いものを選んでください。",
+      description: "いま最も困っていることに近いものを選んでください。",
     },
     3: {
       eyebrow: "最後の質問です",
       title: "どの地域で探していますか？",
-      description: "選んだ区を優先し、通いやすい隣接区の支援先も表示します。",
+      description:
+        "選んだ区を優先し、区を問わず利用できる市全域の窓口と、通いやすい隣接区の支援先もあわせて表示します。",
     },
   }[step];
 

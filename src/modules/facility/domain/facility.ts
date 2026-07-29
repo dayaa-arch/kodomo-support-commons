@@ -9,7 +9,7 @@ export const COST_LABELS = {
   free: "無料",
   partial: "一部有料",
   paid: "有料",
-  unknown: "費用は要確認",
+  unknown: "公式サイトで確認してください",
 } as const;
 
 export type Cost = keyof typeof COST_LABELS;

@@ -11,13 +11,21 @@ export interface FeatureLabel {
   readonly tone: FeatureLabelTone;
 }
 
+/**
+ * ひと目で分かる「確認できた特徴」を導く。
+ *
+ * 出典で確認できなかった事実はタグに出さない（「不明」を特徴として並べない）。
+ * 未掲載の項目は collectUnpublishedFields でまとめて利用者に示す。
+ */
 export function deriveFeatureLabels(facility: Facility): readonly FeatureLabel[] {
-  const labels: FeatureLabel[] = [
-    {
-      label: COST_LABELS[facility.cost],
+  const labels: FeatureLabel[] = [];
+
+  if (facility.cost !== "unknown") {
+    labels.push({
+      label: facility.costDetail?.trim() ? facility.costDetail : COST_LABELS[facility.cost],
       tone: facility.cost === "free" ? "green" : "gray",
-    },
-  ];
+    });
+  }
 
   if (facility.guardianOnlyConsultation === true) {
     labels.push({ label: "保護者だけでも相談可", tone: "orange" });
