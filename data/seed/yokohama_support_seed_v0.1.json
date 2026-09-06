@@ -6,7 +6,6 @@
   "language": "ja",
   "geographic_scope": "横浜市",
   "record_count": 84,
-  "emergency_resource_count": 5,
   "provider_type_counts": {
     "child_family_support_center": 18,
     "child_safety_hotline": 1,
@@ -2253,10 +2252,10 @@
       "parent_only_consultation": true,
       "hours": null,
       "operator": "社会福祉法人幼年保護会",
-      "official_site_url": "https://ymitake.ynakazato.jp/",
+      "official_site_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
       "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/shido/sodan/jikasen_list.html",
       "source_updated_at": "2026-01-05",
-      "checked_at": "2026-07-27",
+      "checked_at": "2026-09-06",
       "verification_status": "official_source",
       "notes": [
         "横浜市の一覧ページには住所・相談時間・費用等が掲載されていないため、未確認項目はnull。",
@@ -3624,63 +3623,6 @@
       "checked_at": "2026-07-27",
       "verification_status": "official_source",
       "notes": []
-    }
-  ],
-  "emergency_resources": [
-    {
-      "id": "emergency-police-110",
-      "label": "事件・事故など、警察の助けが必要な場合",
-      "phone": "110",
-      "availability": "24時間",
-      "cost": null,
-      "anonymous_available": null,
-      "source_url": "https://www.city.yokohama.lg.jp/lang/residents/living-guide/emergency/110-119.html",
-      "checked_at": "2026-07-27",
-      "sort_priority": 10
-    },
-    {
-      "id": "emergency-fire-ambulance-119",
-      "label": "火事・救急車など、消防・救急の助けが必要な場合",
-      "phone": "119",
-      "availability": "24時間",
-      "cost": "通報無料",
-      "anonymous_available": null,
-      "source_url": "https://www.city.yokohama.lg.jp/lang/residents/living-guide/emergency/110-119.html",
-      "checked_at": "2026-07-27",
-      "sort_priority": 20
-    },
-    {
-      "id": "emergency-child-abuse-189",
-      "label": "虐待かもしれないと思った場合",
-      "phone": "189",
-      "availability": "24時間",
-      "cost": "通話料無料",
-      "anonymous_available": true,
-      "source_url": "https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou-dial/",
-      "checked_at": "2026-07-27",
-      "sort_priority": 30
-    },
-    {
-      "id": "emergency-yokohama-child-abuse",
-      "label": "横浜市で、子どもの虐待について相談・通告したい場合",
-      "phone": "0120-805-240",
-      "availability": "24時間365日",
-      "cost": "無料（フリーダイヤル）",
-      "anonymous_available": true,
-      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/oyakokenko/DV/gyakutaisoudan.html",
-      "checked_at": "2026-07-27",
-      "sort_priority": 40
-    },
-    {
-      "id": "emergency-child-sos-24h",
-      "label": "いじめや子どもの悩みを今すぐ相談したい場合",
-      "phone": "0120-078310",
-      "availability": "24時間365日",
-      "cost": "無料（フリーダイヤル）",
-      "anonymous_available": null,
-      "source_url": "https://www.city.yokohama.lg.jp/kosodate-kyoiku/kyoiku/soudan/kyoikusoudan/kyoikusoudan.html",
-      "checked_at": "2026-07-27",
-      "sort_priority": 50
     }
   ]
 }

@@ -103,7 +103,7 @@ function unique<T>(values: readonly T[]): readonly T[] {
 
 export function toFacility(
   record: SeedProviderRecord,
-  sourceTitleByProviderType: ReadonlyMap<string, string>,
+  sourceTitleByUrl: ReadonlyMap<string, string>,
 ): Facility {
   return {
     slug: record.id,
@@ -137,7 +137,7 @@ export function toFacility(
     imageVariant: toImageVariant(record.provider_type),
     notes: record.notes ?? [],
     sourceName:
-      sourceTitleByProviderType.get(record.provider_type) ?? "横浜市 公式情報",
+      sourceTitleByUrl.get(record.source_url) ?? "出典を確認してください",
     sourceUrl: record.source_url,
     lastCheckedAt: record.checked_at,
     verificationStatus: VERIFICATION_STATUS_MAP[record.verification_status],
@@ -145,11 +145,11 @@ export function toFacility(
 }
 
 export function toFacilities(dataset: SeedDataset): readonly Facility[] {
-  const sourceTitleByProviderType = new Map(
-    dataset.source_catalog.map((entry) => [entry.id, entry.title]),
+  const sourceTitleByUrl = new Map(
+    dataset.source_catalog.map((entry) => [entry.url, entry.title]),
   );
 
   return dataset.support_providers.map((record) =>
-    toFacility(record, sourceTitleByProviderType),
+    toFacility(record, sourceTitleByUrl),
   );
 }

@@ -14,10 +14,13 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="フッターナビゲーション">
-          <ul className="grid gap-2 text-sm font-bold text-slate-600 sm:grid-cols-3 md:grid-cols-1">
+          <ul className="grid gap-2 text-sm font-bold text-slate-600 sm:grid-cols-2 md:grid-cols-1">
             <li><Link className="hover:text-brand-700" href="/#finder">支援先を探す</Link></li>
             <li><Link className="hover:text-brand-700" href="/#about">このサイトについて</Link></li>
             <li><Link className="hover:text-brand-700" href="/#guide">はじめての方へ</Link></li>
+            <li><Link className="hover:text-brand-700" href="/data-policy">データの出典と更新方針</Link></li>
+            <li><Link className="hover:text-brand-700" href="/privacy">プライバシーポリシー</Link></li>
+            <li><Link className="hover:text-brand-700" href="/terms">利用上の注意</Link></li>
           </ul>
         </nav>
       </div>

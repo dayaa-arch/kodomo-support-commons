@@ -2,7 +2,7 @@
 
 よこはま支援さがしは、横浜市にある子ども・家庭向けの支援情報を、探しやすく、比較しやすく、利用につながりやすい形で整理するオープンソースプロジェクトです。
 
-不登校、こころの不調、家族関係、ヤングケアラー、子育ての悩みなど、子どもと家族が抱える問題に対して、相談窓口、居場所、学習支援、保護者支援などの地域資源を、共通のデータ形式で公開します。
+不登校、こころの不調、家族関係、ヤングケアラー、子育ての悩みなど、子どもと家族が抱える問題に対して、相談窓口、居場所、学習支援、保護者支援などの公開情報を、共通のデータ形式で整理します。
 
 ## 目指すこと
 
@@ -57,9 +57,9 @@
 
 各支援先のページには、対象者、利用条件、費用、相談方法、利用までの流れ、情報の出典、最終確認日などを掲載します。
 
-## オープンデータとしての特徴
+## 掲載データの特徴
 
-支援資源の情報は、Webサイトだけでなく、JSON、YAML、CSVなどの機械可読な形式でも公開します。
+支援資源の情報は、出典を示したJSONとしてリポジトリで管理します。公開Webページの情報がすべてオープンライセンスとは限らないため、コードのMIT Licenseと掲載データの権利は分けて扱います。再利用時は [DATA_NOTICE.md](./DATA_NOTICE.md) と各出典元の利用条件を確認してください。
 
 データには、次の情報を記録します。
 
@@ -104,6 +104,8 @@
 * 子どもや家族を自動判定しない
 * 虐待、自傷、自殺などのリスクをAIで判定しない
 
+検索条件はReactのメモリ内だけで扱い、URL、Cookie、localStorage、sessionStorage、データベースには保存しません。公開環境で有効にする利用状況の記録は、施設詳細の表示と公式サイトクリックの2イベントおよび施設slugだけです。
+
 緊急時の相談先は、通常の検索結果とは分けて案内します。
 
 本サービスは、医療、法律、福祉に関する専門的判断や、緊急機関の代替を目的とするものではありません。
@@ -141,6 +143,60 @@
 
 支援を必要とする人が安心して使えることを最優先とし、当事者や支援現場の意見を尊重して開発します。
 
+具体的な開発・データ訂正手順は [CONTRIBUTING.md](./CONTRIBUTING.md)、脆弱性の連絡方法は [SECURITY.md](./SECURITY.md) を参照してください。
+
+## 開発と品質確認
+
+Node.js 24.18.0を使用します。`.nvmrc` と `package.json` のVolta設定を基準にしてください。
+
+```bash
+npm ci
+npm run dev
+```
+
+公開前の検証コマンドです。
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run audit:data
+npm run audit:links
+npm run build
+```
+
+`npm run build` はNext.js Static Exportを実行し、Cloudflare Pagesへ配信する `out/` を生成します。完了後に `npm run audit:build` が自動実行され、必須ページ、施設ページ件数、sitemap、検索エンジン公開設定、セキュリティヘッダーを検査します。
+
+## Cloudflare Pagesへの配信
+
+公開ベータ: https://kodomo-support-commons.pages.dev
+
+| 設定 | 値 |
+| --- | --- |
+| Framework preset | Next.js (Static HTML Export) |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Build output directory | `out` |
+| Node.js | `24.18.0` |
+
+環境変数はPreviewとProductionで分けます。
+
+| 変数 | Preview | Production |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Previewでは未設定 | 独自ドメインのorigin |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | `false` または未設定 | 公開確認後に `true` |
+| `NEXT_PUBLIC_ANALYTICS_ENABLED` | `false` または未設定 | binding確認後に `true` |
+
+`wrangler.jsonc` は `ANALYTICS` というAnalytics Engine bindingと `kodomo_support_usage` データセットを定義します。Analytics Engineはローカルbindingに対応しないため、APIの挙動は単体テスト、実bindingはCloudflare Pages Previewで確認します。
+
+独自ドメイン取得後は、PagesのCustom domainsから接続し、`NEXT_PUBLIC_SITE_URL` を更新して再デプロイします。Previewは常にnoindexのままにします。
+
+## 公開ポリシー
+
+- `/privacy`: 保存する情報と保存しない情報
+- `/terms`: 利用上の注意と免責
+- `/data-policy`: 出典、更新頻度、データの権利
+
 ## 開発原則
 
 1. 子どもと家族を監視しない
@@ -169,3 +225,7 @@ Webサイトの規模を広げることよりも、利用者が迷わず、自�
 支援者が、情報検索や確認作業に追われる時間を減らすこと。
 
 そして、地域にある支援資源を、誰もが利用できる公共的なデジタル基盤として育てることです。
+
+## ライセンス
+
+ソースコードは [MIT License](./LICENSE) です。掲載データは [DATA_NOTICE.md](./DATA_NOTICE.md) を参照してください。

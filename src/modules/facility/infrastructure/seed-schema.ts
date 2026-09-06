@@ -85,8 +85,17 @@ export interface SeedSourceCatalogEntry {
   readonly url: string;
 }
 
+export interface SeedWardEntry {
+  readonly code: string;
+  readonly name: string;
+}
+
 export interface SeedDataset {
   readonly schema_version: string;
+  readonly generated_at: string;
+  readonly record_count: number;
+  readonly provider_type_counts: Readonly<Record<string, number>>;
+  readonly ward_master: readonly SeedWardEntry[];
   readonly source_catalog: readonly SeedSourceCatalogEntry[];
   readonly support_providers: readonly SeedProviderRecord[];
 }
@@ -122,10 +131,67 @@ function optionalString(
   if (value === null || value === undefined) {
     return null;
   }
-  if (typeof value !== "string") {
+  if (typeof value !== "string" || value.trim() === "") {
     return fail(where, field, `文字列か null が必要ですが ${describe(value)} でした`);
   }
   return value;
+}
+
+function requireInteger(value: unknown, where: string, field: string): number {
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value < 0) {
+    return fail(where, field, `0以上の整数が必要ですが ${describe(value)} でした`);
+  }
+  return value;
+}
+
+function requireIsoDate(value: unknown, where: string, field: string): string {
+  const date = requireString(value, where, field);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return fail(where, field, `YYYY-MM-DD 形式の日付が必要ですが "${date}" でした`);
+  }
+
+  const [year, month, day] = date.split("-").map(Number);
+  const parsed = new Date(Date.UTC(year!, month! - 1, day));
+  if (
+    parsed.getUTCFullYear() !== year ||
+    parsed.getUTCMonth() !== month! - 1 ||
+    parsed.getUTCDate() !== day
+  ) {
+    return fail(where, field, `実在する日付が必要ですが "${date}" でした`);
+  }
+  return date;
+}
+
+function optionalIsoDate(
+  value: unknown,
+  where: string,
+  field: string,
+): string | null {
+  if (value === null || value === undefined) return null;
+  return requireIsoDate(value, where, field);
+}
+
+function requireHttpUrl(value: unknown, where: string, field: string): string {
+  const url = requireString(value, where, field);
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return fail(where, field, `正しい URL が必要ですが "${url}" でした`);
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    return fail(where, field, `http(s) URL が必要ですが "${url}" でした`);
+  }
+  return url;
+}
+
+function optionalHttpUrl(
+  value: unknown,
+  where: string,
+  field: string,
+): string | null {
+  if (value === null || value === undefined) return null;
+  return requireHttpUrl(value, where, field);
 }
 
 function optionalBoolean(
@@ -150,6 +216,9 @@ function requireEnumArray<T extends string>(
 ): readonly T[] {
   if (!Array.isArray(value)) {
     return fail(where, field, `配列が必要ですが ${describe(value)} でした`);
+  }
+  if (value.length === 0) {
+    return fail(where, field, "1件以上の値が必要です");
   }
   return value.map((entry) => {
     if (typeof entry !== "string" || !allowed.includes(entry as T)) {
@@ -213,6 +282,26 @@ function validateProviderRecord(
       `未知の区コード "${wardCode}" です（許可値: ${SEED_WARD_CODES.join(", ")} または null）`,
     );
   }
+  const wardName = optionalString(value.ward_name, where, "ward_name");
+  if ((wardCode === null) !== (wardName === null)) {
+    fail(where, "ward_name", "ward_code と ward_name は両方 null または両方指定してください");
+  }
+  if (wardCode !== null) {
+    const expectedWardName = WARD_OPTIONS.find(
+      (option) => option.value === wardCode,
+    )?.label;
+    if (wardName !== expectedWardName) {
+      fail(
+        where,
+        "ward_name",
+        `区コード "${wardCode}" に対応する区名は "${expectedWardName}" ですが ${describe(wardName)} でした`,
+      );
+    }
+  }
+
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) {
+    fail(where, "id", `URL に使える英小文字・数字・ハイフン形式が必要ですが "${id}" でした`);
+  }
 
   const verificationStatus = requireString(
     value.verification_status,
@@ -236,7 +325,7 @@ function validateProviderRecord(
     name: requireString(value.name, where, "name"),
     provider_type: requireString(value.provider_type, where, "provider_type"),
     ward_code: wardCode,
-    ward_name: optionalString(value.ward_name, where, "ward_name"),
+    ward_name: wardName,
     address: optionalString(value.address, where, "address"),
     phone: optionalString(value.phone, where, "phone"),
     alternate_phone: optionalString(value.alternate_phone, where, "alternate_phone"),
@@ -272,10 +361,18 @@ function validateProviderRecord(
     ),
     hours: optionalString(value.hours, where, "hours"),
     operator: optionalString(value.operator, where, "operator"),
-    official_site_url: optionalString(value.official_site_url, where, "official_site_url"),
-    source_url: requireString(value.source_url, where, "source_url"),
-    source_updated_at: optionalString(value.source_updated_at, where, "source_updated_at"),
-    checked_at: requireString(value.checked_at, where, "checked_at"),
+    official_site_url: optionalHttpUrl(
+      value.official_site_url,
+      where,
+      "official_site_url",
+    ),
+    source_url: requireHttpUrl(value.source_url, where, "source_url"),
+    source_updated_at: optionalIsoDate(
+      value.source_updated_at,
+      where,
+      "source_updated_at",
+    ),
+    checked_at: requireIsoDate(value.checked_at, where, "checked_at"),
     verification_status: verificationStatus as SeedVerificationStatusCode,
     notes: optionalStringArray(value.notes, where, "notes"),
   };
@@ -295,8 +392,35 @@ function validateSourceCatalogEntry(
   return {
     id: requireString(value.id, where, "id"),
     title: requireString(value.title, where, "title"),
-    url: requireString(value.url, where, "url"),
+    url: requireHttpUrl(value.url, where, "url"),
   };
+}
+
+function validateWardEntry(value: unknown, index: number): SeedWardEntry {
+  if (!isRecord(value)) {
+    throw new SeedValidationError(
+      `ward_master[${index}]: オブジェクトが必要ですが ${describe(value)} でした`,
+    );
+  }
+  const where = `ward_master[${index}]`;
+  return {
+    code: requireString(value.code, where, "code"),
+    name: requireString(value.name, where, "name"),
+  };
+}
+
+function validateCountMap(value: unknown): Readonly<Record<string, number>> {
+  if (!isRecord(value)) {
+    throw new SeedValidationError(
+      `データセット の provider_type_counts: オブジェクトが必要ですが ${describe(value)} でした`,
+    );
+  }
+  return Object.fromEntries(
+    Object.entries(value).map(([key, count]) => [
+      key,
+      requireInteger(count, "provider_type_counts", key),
+    ]),
+  );
 }
 
 /**
@@ -315,6 +439,17 @@ export function validateSeedDataset(input: unknown): SeedDataset {
     "データセット",
     "schema_version",
   );
+  const generatedAt = requireIsoDate(
+    input.generated_at,
+    "データセット",
+    "generated_at",
+  );
+  const recordCount = requireInteger(
+    input.record_count,
+    "データセット",
+    "record_count",
+  );
+  const providerTypeCounts = validateCountMap(input.provider_type_counts);
 
   if (!Array.isArray(input.support_providers)) {
     throw new SeedValidationError(
@@ -327,10 +462,50 @@ export function validateSeedDataset(input: unknown): SeedDataset {
       `データセット の source_catalog: 配列が必要ですが ${describe(input.source_catalog)} でした`,
     );
   }
+  if (!Array.isArray(input.ward_master)) {
+    throw new SeedValidationError(
+      `データセット の ward_master: 配列が必要ですが ${describe(input.ward_master)} でした`,
+    );
+  }
 
+  const sourceCatalog = input.source_catalog.map(validateSourceCatalogEntry);
+  const wardMaster = input.ward_master.map(validateWardEntry);
   const supportProviders = input.support_providers.map(validateProviderRecord);
 
+  if (recordCount !== supportProviders.length) {
+    throw new SeedValidationError(
+      `record_count は ${recordCount} ですが support_providers は ${supportProviders.length} 件です`,
+    );
+  }
+
+  const expectedWards = WARD_OPTIONS.map(({ value, label }) => ({
+    code: value,
+    name: label,
+  }));
+  if (JSON.stringify(wardMaster) !== JSON.stringify(expectedWards)) {
+    throw new SeedValidationError(
+      "ward_master がアプリケーションの18区マスタと一致しません",
+    );
+  }
+
+  const actualProviderTypeCounts: Record<string, number> = {};
+  for (const provider of supportProviders) {
+    actualProviderTypeCounts[provider.provider_type] =
+      (actualProviderTypeCounts[provider.provider_type] ?? 0) + 1;
+  }
+  const sortedCounts = (counts: Readonly<Record<string, number>>) =>
+    Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
+  if (
+    JSON.stringify(sortedCounts(providerTypeCounts)) !==
+    JSON.stringify(sortedCounts(actualProviderTypeCounts))
+  ) {
+    throw new SeedValidationError(
+      "provider_type_counts が support_providers の実件数と一致しません",
+    );
+  }
+
   const seenIds = new Set<string>();
+  const seenSpecificOfficialUrls = new Map<string, string>();
   for (const provider of supportProviders) {
     if (seenIds.has(provider.id)) {
       throw new SeedValidationError(
@@ -338,11 +513,48 @@ export function validateSeedDataset(input: unknown): SeedDataset {
       );
     }
     seenIds.add(provider.id);
+
+    if (
+      provider.official_site_url &&
+      provider.official_site_url !== provider.source_url
+    ) {
+      const existingId = seenSpecificOfficialUrls.get(provider.official_site_url);
+      if (existingId) {
+        throw new SeedValidationError(
+          `個別の公式 URL "${provider.official_site_url}" が ${existingId} と ${provider.id} で重複しています`,
+        );
+      }
+      seenSpecificOfficialUrls.set(provider.official_site_url, provider.id);
+    }
+  }
+
+  const sourceIds = new Set<string>();
+  const sourceUrls = new Set<string>();
+  for (const source of sourceCatalog) {
+    if (sourceIds.has(source.id)) {
+      throw new SeedValidationError(`source_catalog の id "${source.id}" が重複しています`);
+    }
+    if (sourceUrls.has(source.url)) {
+      throw new SeedValidationError(`source_catalog の URL "${source.url}" が重複しています`);
+    }
+    sourceIds.add(source.id);
+    sourceUrls.add(source.url);
+  }
+  for (const provider of supportProviders) {
+    if (!sourceUrls.has(provider.source_url)) {
+      throw new SeedValidationError(
+        `${provider.id} の source_url "${provider.source_url}" が source_catalog にありません`,
+      );
+    }
   }
 
   return {
     schema_version: schemaVersion,
-    source_catalog: input.source_catalog.map(validateSourceCatalogEntry),
+    generated_at: generatedAt,
+    record_count: recordCount,
+    provider_type_counts: providerTypeCounts,
+    ward_master: wardMaster,
+    source_catalog: sourceCatalog,
     support_providers: supportProviders,
   };
 }

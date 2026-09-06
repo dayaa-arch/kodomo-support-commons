@@ -8,21 +8,26 @@ import {
 import { INFORMATION_REPORT_FORM_URL } from "./external-links.ts";
 import { toTelHref } from "./phone.ts";
 
-test("すべての連絡先に名称・電話番号・受付時間・説明がある", () => {
+test("すべての連絡先に名称・電話番号・受付時間・説明・出典・確認日がある", () => {
   for (const contact of [...CHILD_CONSULTATION_CONTACTS, ...EMERGENCY_CALL_CONTACTS]) {
     assert.ok(contact.name.trim(), "名称がある");
     assert.ok(contact.phone.trim(), `${contact.name} に電話番号がある`);
     assert.ok(contact.availability.trim(), `${contact.name} に受付時間がある`);
     assert.ok(contact.description.trim(), `${contact.name} に説明がある`);
+    assert.ok(contact.sourceName.trim(), `${contact.name} に出典名がある`);
+    assert.match(contact.sourceUrl, /^https:\/\//, `${contact.name} に出典URLがある`);
+    assert.match(contact.lastCheckedAt, /^\d{4}-\d{2}-\d{2}$/);
   }
 });
 
-test("子ども向けの相談窓口として指定の2件を掲載している", () => {
+test("子ども向けの相談窓口として指定の4件を掲載している", () => {
   assert.deepEqual(
     CHILD_CONSULTATION_CONTACTS.map(({ name, phone }) => [name, phone]),
     [
-      ["24時間こどもSOSダイヤル", "0120-0-78310"],
+      ["24時間子供SOSダイヤル", "0120-0-78310"],
       ["チャイルドライン", "0120-99-7777"],
+      ["児童相談所虐待対応ダイヤル 189", "189"],
+      ["よこはま子ども虐待ホットライン", "0120-805-240"],
     ],
   );
 });
@@ -38,6 +43,13 @@ test("掲載元の案内文をそのまま伝える", () => {
     childline?.description,
     "チャイルドラインは子どものための相談先です。ちょっとしたことでも、おしゃべりしたいだけでも大丈夫。どんなことでも話してね。",
   );
+});
+
+test("チャイルドラインの年末年始休止を表示する", () => {
+  const childline = CHILD_CONSULTATION_CONTACTS.find(
+    ({ id }) => id === "emergency-childline",
+  );
+  assert.match(childline?.availability ?? "", /12月29日〜1月3日は休み/);
 });
 
 test("いのちに関わる危険の通報先として110番・119番を残している", () => {

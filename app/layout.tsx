@@ -4,6 +4,12 @@ import type { ReactNode } from "react";
 
 import { SiteFooter } from "@/src/shared/presentation/SiteFooter";
 import { SiteHeader } from "@/src/shared/presentation/SiteHeader";
+import {
+  ALLOW_INDEXING,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/src/shared/domain/site-config";
 
 import "./globals.css";
 import { Providers } from "./providers";
@@ -19,12 +25,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: SITE_URL,
   title: {
-    default: "よこはま支援さがし",
-    template: "%s | よこはま支援さがし",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "横浜市内の子ども・家庭向け支援情報を、3問から探して比較できるOSSプロジェクトです。",
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: ALLOW_INDEXING,
+    follow: ALLOW_INDEXING,
+  },
 };
 
 export default function RootLayout({

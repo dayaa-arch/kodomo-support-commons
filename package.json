@@ -5,14 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run audit:data",
     "build": "next build",
+    "postbuild": "npm run audit:build",
+    "preview:cloudflare": "npm run build && wrangler pages dev out",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/modules/facility/domain/derive-feature-labels.test.ts src/modules/facility/domain/unpublished-fields.test.ts src/modules/facility/infrastructure/seed-schema.test.ts src/modules/facility/infrastructure/seed-mapper.test.ts src/modules/facility/infrastructure/seed-dataset.test.ts src/modules/search/domain/search-answers.test.ts src/modules/search/domain/search-facilities.test.ts src/shared/domain/emergency-contacts.test.ts src/shared/domain/wards.test.ts"
+    "test": "node --test functions/api/analytics.test.ts src/modules/facility/domain/derive-feature-labels.test.ts src/modules/facility/domain/unpublished-fields.test.ts src/modules/facility/infrastructure/data-audit.test.ts src/modules/facility/infrastructure/seed-schema.test.ts src/modules/facility/infrastructure/seed-mapper.test.ts src/modules/facility/infrastructure/seed-dataset.test.ts src/modules/search/domain/search-answers.test.ts src/modules/search/domain/search-facilities.test.ts src/shared/domain/emergency-contacts.test.ts src/shared/domain/wards.test.ts",
+    "audit:data": "node scripts/audit-data.ts",
+    "audit:build": "node scripts/audit-build.ts",
+    "audit:links": "node scripts/audit-links.ts"
   },
   "dependencies": {
-    "next": "16.2.12",
+    "next": "16.3.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
@@ -22,9 +28,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.129.0"
+  },
+  "overrides": {
+    "nanoid": "3.3.18"
   },
   "volta": {
     "node": "24.18.0"

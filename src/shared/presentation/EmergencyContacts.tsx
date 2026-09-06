@@ -8,19 +8,29 @@ import { Icon } from "./Icon";
 
 function ConsultationCard({ contact }: { readonly contact: EmergencyContact }) {
   return (
-    <a
-      href={toTelHref(contact.phone)}
-      className="flex flex-col gap-1 rounded-xl border border-coral-200 bg-white p-4 transition hover:border-coral-400 hover:bg-coral-50/60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-coral-200"
-    >
+    <article className="flex flex-col gap-1 rounded-xl border border-coral-200 bg-white p-4">
       <span className="font-black text-slate-900">{contact.name}</span>
-      <span className="inline-flex items-center gap-2 text-lg font-black text-coral-700">
+      <a
+        href={toTelHref(contact.phone)}
+        className="inline-flex items-center gap-2 self-start rounded text-lg font-black text-coral-700 underline decoration-coral-300 underline-offset-4 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-coral-200"
+      >
         <Icon name="phone" className="size-5 shrink-0" />
         {contact.phone}
         <span className="sr-only">に電話をかける</span>
-      </span>
+      </a>
       <span className="text-xs font-bold text-slate-500">{contact.availability}</span>
       <span className="mt-1 text-sm leading-6 text-slate-700">{contact.description}</span>
-    </a>
+      <span className="mt-2 text-xs leading-5 text-slate-500">最終確認日 {contact.lastCheckedAt}</span>
+      <a
+        className="inline-flex items-center gap-1 self-start text-xs font-bold text-coral-800 underline underline-offset-2"
+        href={contact.sourceUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        出典: {contact.sourceName}<Icon name="external-link" className="size-3" />
+        <span className="sr-only">（新しいタブで開きます）</span>
+      </a>
+    </article>
   );
 }
 
@@ -66,6 +76,15 @@ export function EmergencyContacts() {
                   <span className="block text-sm font-black text-coral-800">{contact.name}</span>
                   <span className="block text-xs text-slate-500">{contact.description}</span>
                 </span>
+              </a>
+              <a
+                className="mt-1 inline-flex items-center gap-1 text-xs font-bold text-coral-800 underline underline-offset-2"
+                href={contact.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                出典を確認する<Icon name="external-link" className="size-3" />
+                <span className="sr-only">（新しいタブで開きます）</span>
               </a>
             </li>
           ))}
