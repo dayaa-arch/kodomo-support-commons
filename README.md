@@ -189,6 +189,15 @@ npm run build
 
 `wrangler.jsonc` は `ANALYTICS` というAnalytics Engine bindingと `kodomo_support_usage` データセットを定義します。Analytics Engineはローカルbindingに対応しないため、APIの挙動は単体テスト、実bindingはCloudflare Pages Previewで確認します。
 
+現在のPagesプロジェクトはDirect Upload方式です。`main` の品質チェック成功後、次のコマンドで本番へ反映します。独自ドメインを決めるまでは `NEXT_PUBLIC_SITE_URL` と `NEXT_PUBLIC_ALLOW_INDEXING` を設定せず、noindexを維持します。
+
+```bash
+git switch main
+git pull --ff-only
+NEXT_PUBLIC_ANALYTICS_ENABLED=true npm run build
+npx wrangler pages deploy out --project-name kodomo-support-commons --branch main
+```
+
 独自ドメイン取得後は、PagesのCustom domainsから接続し、`NEXT_PUBLIC_SITE_URL` を更新して再デプロイします。Previewは常にnoindexのままにします。
 
 ## 公開ポリシー
