@@ -5,7 +5,7 @@ import { toCost, toFacility } from "./seed-mapper.ts";
 import type { SeedProviderRecord } from "./seed-schema.ts";
 
 const SOURCE_TITLES = new Map([
-  ["ward_child_family_consultation", "こども家庭相談"],
+  ["https://example.city/child", "こども家庭相談"],
 ]);
 
 function createRecord(
@@ -156,4 +156,13 @@ test("補足が無い場合は空配列にする", () => {
   const facility = toFacility(createRecord({ notes: null }), SOURCE_TITLES);
 
   assert.deepEqual(facility.notes, []);
+});
+
+test("施設種別ではなく出典URLから出典名を解決する", () => {
+  const facility = toFacility(
+    createRecord({ provider_type: "catalog-idとは異なる種別" }),
+    SOURCE_TITLES,
+  );
+
+  assert.equal(facility.sourceName, "こども家庭相談");
 });

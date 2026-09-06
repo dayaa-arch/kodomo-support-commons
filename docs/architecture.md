@@ -6,7 +6,7 @@
 
 | 分類 | 採用 | 備考 |
 | --- | --- | --- |
-| フレームワーク | **Next.js 16.2.12**（App Router） | Server Components デフォルト。静的生成中心 |
+| フレームワーク | **Next.js 16.3.4**（App Router） | Server Components デフォルト。静的生成中心 |
 | UI ライブラリ | **React 19.2.4** | |
 | 言語 | **TypeScript 5**（strict） | `noEmit`, `moduleResolution: bundler` |
 | スタイリング | **Tailwind CSS v4**（`@tailwindcss/postcss`） | ユーティリティ＋デザイントークン |
@@ -14,7 +14,7 @@
 | Lint | **ESLint 9**（`eslint-config-next`） | flat config (`eslint.config.mjs`) |
 | テスト | **Node.js 組み込みテストランナー** | TypeScript の `*.test.ts` を `node --test` で実行。追加依存なし |
 | データ形式 | **JSON** | 施設情報の正本（`data/seed/*.json`）。DB は持たない |
-| デプロイ | 静的ホスティング想定（例: Vercel / 静的エクスポート） | MVP はサーバ状態を持たない |
+| デプロイ | **Cloudflare Pages**（Next.js Static Export） | `out/` を配信。分析APIのみPages Functions |
 
 > **重要**: 本プロジェクトの Next.js はバージョン固有の破壊的変更を含む。実装前に必ず `node_modules/next/dist/docs/01-app/` の該当ガイドを参照する（`AGENTS.md`）。確認済みの主要事項:
 > - `params` / `searchParams` は **Promise**。Server Component では `await`、Client Component では `use()` で解決する。
@@ -24,6 +24,7 @@
 
 - **静的データ駆動**: 施設情報（JSON）をビルド時に読み込み・検証し、詳細ページを静的生成（`generateStaticParams`）する。検索に必要な施設一覧も同じ経路で供給する。
 - **クライアント内検索**: 3問ウィザードの絞り込み・並び替えはブラウザ内で完結。ユーザー入力をサーバに送らず、URL・Cookie・localStorage にも保存しない（プライバシー要件）。
+- **最小分析**: `facility_detail_view` と `official_site_click` のイベント名・施設slugだけをPages Functionへ送り、Analytics Engineへ記録する。検索条件やリクエスト属性は分析データに含めない。
 - **モバイルファースト**: すべての画面をモバイル前提で設計し、デスクトップは拡張（結果画面の2カラム等）。
 - **ドメイン駆動 × レイヤード（モジュラモノリス）**: `src/modules/<domain>/{domain,application,infrastructure,presentation}` ＋ `src/shared/`。`app/**` は Next.js のルーティング層（framework presentation）として薄く保ち、モジュールの presentation を合成する。
 
@@ -90,6 +91,10 @@ flowchart LR
 | `/` | 静的 | トップ＋3問ウィザード導入 |
 | `/search` | 静的（クライアント状態で結果描画） | ウィザード回答→結果一覧。※検索条件は URL に含めない |
 | `/facilities/[slug]` | 静的生成（`generateStaticParams`） | 施設詳細 |
+| `/privacy` | 静的 | プライバシーポリシー |
+| `/terms` | 静的 | 利用上の注意・免責 |
+| `/data-policy` | 静的 | 出典・更新・権利方針 |
+| `/api/analytics` | Cloudflare Pages Function | 許可した匿名イベント2種のみ受理 |
 | （共通） | レイアウト/コンポーネント | 緊急相談セクション・パンくず 等 |
 
 - 検索条件を URL クエリに載せないため、`/search` はクライアント状態で結果を描画する（ディープリンク・共有は MVP では非対応＝プライバシー優先）。
@@ -105,6 +110,7 @@ flowchart LR
 - Cookie / localStorage / sessionStorage にユーザーの相談内容を保存しない。
 - 検索内容を URL パラメータやクエリに含めない。
 - 外部送信は「最小限のアクセス解析（閲覧数・公式クリック数）」のみで、個人を特定しない。フィンガープリント・セッションリプレイを使用しない。
+- 分析payloadは `{ event, slug }` に固定し、未知イベント・未知slug・余分な項目・cross-origin送信を拒否する。
 - 外部リンク（公式サイト）は `target="_blank"` ＋ `rel="noopener noreferrer"`、外部遷移が分かる表示。
 - 入力バリデーション・XSS 対策（React の既定エスケープを尊重し、`dangerouslySetInnerHTML` を避ける）。
 
@@ -118,3 +124,11 @@ flowchart LR
 - MVP はバックエンド DB・管理画面・ログインを持たない。情報更新は Google フォーム受付＋ PR。
 - 追加依存は最小限（プライバシー・監査容易性・OSS としての可読性を優先）。
 - Node/Next のバージョンは固定（`.nvmrc` / `package.json`）。
+
+## 10. 公開・監査構成
+
+- `next.config.ts` の `output: "export"` により、静的成果物を `out/` へ生成する。
+- `public/_headers` をCloudflare Pagesが読み取り、CSP、frame拒否、MIME sniffing防止などを付与する。
+- `NEXT_PUBLIC_SITE_URL` 未設定または `NEXT_PUBLIC_ALLOW_INDEXING !== "true"` の環境はrobotsで全体をnoindexにする。
+- `npm run build` の前にデータ整合性と鮮度を検査する。施設は90日、緊急相談先は30日を上限とする。
+- GitHub ActionsでPR品質検査を行い、週次に外部リンクと鮮度を監査する。

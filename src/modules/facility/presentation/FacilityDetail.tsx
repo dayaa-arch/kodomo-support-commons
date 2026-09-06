@@ -17,6 +17,7 @@ import {
   UNPUBLISHED_INFORMATION_LABEL,
   type Facility,
 } from "../index";
+import { FacilityAnalytics } from "./FacilityAnalytics";
 
 /** 運営部署と運営主体を、欠けている側を補わずに連結する。 */
 function formatOperator(facility: Facility): string {
@@ -164,17 +165,7 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
         </div>
 
         <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
-          {facility.officialUrl ? (
-            <a
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-700 px-6 py-3 font-black text-white shadow-[0_8px_20px_rgba(22,111,175,0.2)] transition hover:bg-brand-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200"
-              href={facility.officialUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              公式サイトを見る<Icon name="external-link" className="size-4" />
-              <span className="sr-only">（新しいタブで開きます）</span>
-            </a>
-          ) : null}
+          <FacilityAnalytics slug={facility.slug} officialUrl={facility.officialUrl} />
           <a
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-brand-300 bg-white px-6 py-3 font-black text-brand-700 transition hover:border-brand-500 hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-200"
             href={INFORMATION_REPORT_FORM_URL}

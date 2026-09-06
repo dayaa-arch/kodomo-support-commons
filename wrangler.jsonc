@@ -1,0 +1,11 @@
+{
+  "name": "kodomo-support-commons",
+  "compatibility_date": "2026-09-06",
+  "pages_build_output_dir": "out",
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "kodomo_support_usage"
+    }
+  ]
+}

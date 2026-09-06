@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { SeedValidationError, validateSeedDataset } from "./seed-schema.ts";
+import { WARD_OPTIONS } from "../../../shared/domain/wards.ts";
 
 function createRawRecord(overrides: Record<string, unknown> = {}) {
   return {
@@ -36,6 +37,15 @@ function createRawRecord(overrides: Record<string, unknown> = {}) {
 function createRawDataset(records: readonly unknown[]) {
   return {
     schema_version: "0.1.0",
+    generated_at: "2026-07-27",
+    record_count: records.length,
+    provider_type_counts: {
+      ward_child_family_consultation: records.length,
+    },
+    ward_master: WARD_OPTIONS.map(({ value, label }) => ({
+      code: value,
+      name: label,
+    })),
     source_catalog: [
       {
         id: "ward_child_family_consultation",
@@ -130,6 +140,56 @@ test("id の重複は検証に失敗する", () => {
         ]),
       ),
     /重複/,
+  );
+});
+
+test("宣言件数と実件数の不一致は検証に失敗する", () => {
+  assert.throws(
+    () =>
+      validateSeedDataset({
+        ...createRawDataset([createRawRecord()]),
+        record_count: 2,
+      }),
+    /record_count/,
+  );
+});
+
+test("実在しない日付と不正なURLは検証に失敗する", () => {
+  assert.throws(
+    () =>
+      validateSeedDataset(
+        createRawDataset([createRawRecord({ checked_at: "2026-02-30" })]),
+      ),
+    /実在する日付/,
+  );
+  assert.throws(
+    () =>
+      validateSeedDataset(
+        createRawDataset([createRawRecord({ official_site_url: "javascript:alert(1)" })]),
+      ),
+    /http\(s\) URL/,
+  );
+});
+
+test("区コードと区名の不一致は検証に失敗する", () => {
+  assert.throws(
+    () =>
+      validateSeedDataset(
+        createRawDataset([createRawRecord({ ward_name: "青葉区" })]),
+      ),
+    /区コード.*対応する区名/,
+  );
+});
+
+test("source_catalog にない出典URLは検証に失敗する", () => {
+  assert.throws(
+    () =>
+      validateSeedDataset(
+        createRawDataset([
+          createRawRecord({ source_url: "https://example.city/unknown" }),
+        ]),
+      ),
+    /source_catalog にありません/,
   );
 });
 
