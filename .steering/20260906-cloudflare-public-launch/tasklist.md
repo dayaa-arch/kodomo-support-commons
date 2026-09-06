@@ -60,8 +60,8 @@
 - [x] PR / push 用の品質 GitHub Actions を追加する
 - [x] 週次・手動実行のリンク / 鮮度監査 Actions を追加する
 - [x] workflow permissions と外部入力の扱いを最小権限で確認する
-- [ ] PR 上で全 required checks が成功することを確認する
-- [ ] `main` branch protection に required check を設定する
+- [x] PR 上で全 required checks が成功することを確認する
+- [x] `main` branch protection に required check を設定する
 
 ## 7. 公開前検証
 
@@ -76,11 +76,11 @@
 
 ## 8. 公開反映
 
-- [ ] 検証結果と残余リスクを Pull Request に記載する
-- [ ] Pull Request を `main` へ merge する
-- [ ] ローカル・リモート作業ブランチを削除する
-- [ ] Cloudflare Pages production deployment を確認する
-- [ ] 公開 URL、更新方法、監査方法を README / 運用文書へ反映する
+- [x] 検証結果と残余リスクを Pull Request に記載する
+- [x] Pull Request を `main` へ merge する
+- [x] ローカル・リモート作業ブランチを削除する
+- [x] Cloudflare Pages production deployment を確認する
+- [x] 公開 URL、更新方法、監査方法を README / 運用文書へ反映する
 
 ## 9. ドメイン取得（別確認）
 
@@ -93,7 +93,7 @@
 
 ## 完了条件
 
-- [ ] 要求定義の受け入れ条件をすべて満たす
-- [ ] Cloudflare Pages の production deployment が正常である
-- [ ] ドメイン未取得の場合でも、Pages URL で安全な公開ベータとして利用できる
-- [ ] ドメイン購入が未実施の場合、その理由と次の操作が明確に記録されている
+- [x] 要求定義の受け入れ条件をすべて満たす
+- [x] Cloudflare Pages の production deployment が正常である
+- [x] ドメイン未取得の場合でも、Pages URL で安全な公開ベータとして利用できる
+- [x] ドメイン購入が未実施の場合、その理由と次の操作が明確に記録されている

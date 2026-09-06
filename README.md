@@ -169,6 +169,8 @@ npm run build
 
 ## Cloudflare Pagesへの配信
 
+公開ベータ: https://kodomo-support-commons.pages.dev
+
 | 設定 | 値 |
 | --- | --- |
 | Framework preset | Next.js (Static HTML Export) |
