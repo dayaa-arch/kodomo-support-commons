@@ -11,7 +11,7 @@ export default function DataPolicyPage() {
   return (
     <PolicyPage
       title="データの出典と更新方針"
-      description="掲載する事実情報の由来、確認頻度、再利用時の注意を説明します。"
+      description="どこから情報を集め、いつ確認するか、掲載情報を再利用するときの注意点を説明します。"
     >
       <section>
         <h2>情報源</h2>
@@ -28,7 +28,7 @@ export default function DataPolicyPage() {
       <section>
         <h2>確認頻度</h2>
         <p>
-          緊急相談先は30日以内、施設情報は90日以内を目安に再確認します。週次の自動監査で期限超過とリンク切れを検知し、データ変更はPull Requestで履歴を残します。
+          緊急相談先は30日ごと、施設情報は90日ごとを目安に再確認します。毎週の自動チェックで、確認期限を過ぎた情報や開けないリンクを見つけます。修正内容はGitHubで履歴を残します。
         </p>
       </section>
       <section>
@@ -40,7 +40,7 @@ export default function DataPolicyPage() {
       <section>
         <h2>訂正の提案</h2>
         <p>
-          情報の誤りや変更は、施設詳細ページのGoogleフォームまたはGitHub Issueから報告できます。個人的な相談内容や健康情報などの機微情報はGitHubへ書き込まないでください。
+          情報の誤りや変更は、施設詳細ページの「この情報が古い場合は知らせる」からGoogleフォームで報告できます。<a className="underline underline-offset-4" href="https://github.com/dayaa-arch/kodomo-support-commons/issues">GitHubの公開問い合わせページ（Issue）</a>も利用できますが、個人的な相談内容や健康に関する情報は書き込まないでください。
         </p>
       </section>
       <p>最終更新日: 2026年9月6日</p>

@@ -31,7 +31,7 @@ export function SearchResultsScreen({
       <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
         <span className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-brand-50 text-brand-700"><Icon name="search" className="size-8" /></span>
         <h1 className="mt-6 text-2xl font-black text-slate-950 sm:text-3xl">検索条件がまだありません</h1>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-600">検索内容を保存しないため、直接この画面を開いた場合や再読み込み後は、3問の回答からもう一度始めてください。</p>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-600">3つの質問に答えると、支援先を探せます。回答は保存されないため、ページを再読み込みした場合は、もう一度回答してください。</p>
         <LinkButton href="/#finder" className="mt-7"><Icon name="arrow-left" className="size-4" />3問の検索をはじめる</LinkButton>
       </div>
     );
@@ -61,7 +61,9 @@ export function SearchResultsScreen({
         {/* 条件変更の導線は見出し横のボタン（md 未満）とサイドバー（md 以上）に集約し、ここでは重ねない。 */}
         <div className="mt-5 rounded-2xl border border-sun-200 bg-sun-50 p-4">
           <p className="text-sm leading-7 text-sun-900">
-            <strong>{getTargetAudienceLabel(answers.targetAudience)}</strong>のために、<strong>{getWardLabel(answers.ward)}</strong>周辺で、<strong>{getSupportThemeLabel(answers.supportTheme)}</strong>について探しています。
+            誰のために：<strong>{getTargetAudienceLabel(answers.targetAudience)}</strong><br />
+            困っていること：<strong>{getSupportThemeLabel(answers.supportTheme)}</strong><br />
+            地域：<strong>{getWardLabel(answers.ward)}</strong>とその周辺
           </p>
         </div>
 
@@ -102,7 +104,7 @@ export function SearchResultsScreen({
               </div>
             )}
             <div className="mt-6 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-xs leading-6 text-violet-900">
-              選んだ区の支援先を先に、区を問わず利用できる市全域の窓口、通いやすい隣接区の支援先を続けて表示しています。
+              選んだ区、住んでいる区を問わず利用できる窓口、隣の区の順に表示しています。同じ地域では、回答に近い支援先を先に表示します。
               掲載内容は公開情報をもとに整理したものです。利用前に公式サイトでご確認ください。
             </div>
           </section>

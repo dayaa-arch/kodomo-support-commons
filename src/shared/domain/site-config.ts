@@ -1,6 +1,6 @@
 export const SITE_NAME = "よこはま支援さがし";
 export const SITE_DESCRIPTION =
-  "横浜市内の子ども・家庭向け支援情報を、3問から探して比較できるOSSプロジェクトです。";
+  "3つの質問に答えて、横浜市内の子ども・家庭向けの相談窓口や居場所を探せます。対象者や相談方法、受付時間を比べて、支援先を選べます。";
 
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 

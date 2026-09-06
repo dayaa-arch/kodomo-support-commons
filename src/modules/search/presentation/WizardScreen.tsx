@@ -117,7 +117,7 @@ export function WizardScreen() {
     1: {
       eyebrow: "まず、どなたのために探すかを教えてください",
       title: "どなたのための支援を探していますか？",
-      description: "選んだ立場に合わせて、見やすい情報を優先します。",
+      description: "選んだ人を対象とする支援先を、検索結果で優先します。",
     },
     2: {
       eyebrow: "いちばん困っていることを1つ",
@@ -128,7 +128,7 @@ export function WizardScreen() {
       eyebrow: "最後の質問です",
       title: "どの地域で探していますか？",
       description:
-        "選んだ区を優先し、区を問わず利用できる市全域の窓口と、通いやすい隣接区の支援先もあわせて表示します。",
+        "選んだ区の支援先から順に表示します。住んでいる区を問わず利用できる窓口と、隣の区の支援先も探せます。",
     },
   }[step];
 
@@ -252,7 +252,7 @@ export function WizardScreen() {
           </div>
         </div>
         <p className="mt-5 flex items-center justify-center gap-2 text-center text-xs leading-6 text-slate-500">
-          <Icon name="shield-check" className="size-4 text-leaf-700" />回答はこの画面を開いている間だけ保持され、URLや端末には保存されません。
+          <Icon name="shield-check" className="size-4 text-leaf-700" />回答はサイトを使っている間だけ画面内で扱い、再読み込みすると消えます。URLや端末には保存されません。
         </p>
       </div>
     </section>

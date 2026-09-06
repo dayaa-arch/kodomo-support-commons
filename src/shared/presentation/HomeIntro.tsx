@@ -22,7 +22,7 @@ export function HomeIntro() {
               <span className="block text-brand-700">困りごとに合う支援先を。</span>
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-650 sm:text-lg">
-              不登校や学校に行きづらい気持ち、家族の悩みを、安心して相談できる場所から探せます。
+              学校に行きづらい、家族のことで悩んでいる。そんなときに相談できる横浜市内の窓口や居場所を探せます。
             </p>
             <a
               href="#finder"

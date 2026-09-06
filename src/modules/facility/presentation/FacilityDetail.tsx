@@ -148,7 +148,7 @@ export function FacilityDetail({ facility }: { readonly facility: Facility }) {
                 公式サイトで確認が必要な項目
               </h2>
               <p className="mt-1 text-sm leading-7 text-slate-600">
-                次の項目は公開情報で確認できませんでした。推測で補わずそのまま掲載しています。
+                次の項目は、このサイトでは確認できていません。公式サイトを見るか、施設へ直接お問い合わせください。
               </p>
               <ul className="mt-3 flex flex-wrap gap-2">
                 {unpublishedFields.map((field) => (
