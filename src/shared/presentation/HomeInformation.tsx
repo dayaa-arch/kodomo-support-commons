@@ -3,9 +3,9 @@ import { Icon, type IconName } from "./Icon";
 
 export function HomeInformation() {
   const principles: readonly [IconName, string, string][] = [
-    ["shield-check", "検索内容を保存しない", "回答はURL・Cookie・端末の保存領域・サーバへ残しません。"],
+    ["shield-check", "検索内容を保存しない", "質問への回答は、サイトを使っている間だけ画面内で扱います。再読み込みすると消えます。"],
     ["check", "確認状況をわかりやすく", "出典と最終確認日、確認済みかどうかを支援先ごとに示します。"],
-    ["users", "人の判断を置き換えない", "自動判定や人気ランキングではなく、利用者が比較できる情報を整えます。"],
+    ["users", "自分で比べて選べる", "利用できる人や相談方法を見比べながら、相談したい支援先を選べます。"],
   ];
 
   return (
@@ -14,8 +14,8 @@ export function HomeInformation() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm font-black tracking-[0.12em] text-leaf-700">このサイトについて</p>
-            <h2 id="about-heading" className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">安心して支援先を比べられる、公共的な情報基盤へ</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">よこはま支援さがしは、横浜市内の不登校支援を、問い合わせる前から分かりやすく確認できるようにするOSSプロジェクトです。</p>
+            <h2 id="about-heading" className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">相談する前に、支援先のことを知る</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">よこはま支援さがしでは、不登校や家庭の悩みなどを相談できる横浜市内の支援先を紹介しています。利用できる人、相談方法、受付時間などをまとめて確認できます。</p>
           </div>
           <div className="mt-9 grid gap-4 md:grid-cols-3">
             {principles.map(([icon, title, description]) => (
@@ -33,8 +33,8 @@ export function HomeInformation() {
         <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[.8fr_1.2fr] lg:px-8">
           <div>
             <p className="text-sm font-black tracking-[0.12em] text-brand-700">はじめての方へ</p>
-            <h2 id="guide-heading" className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">正解を選ばなくても大丈夫です</h2>
-            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">今の気持ちにいちばん近い選択肢を選んでください。検索結果から何度でも条件を変えられます。</p>
+            <h2 id="guide-heading" className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">今の気持ちに近いものを選んでください</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">迷ったら、いちばん気になっていることから探してみてください。検索したあとでも、条件は何度でも変えられます。</p>
           </div>
           <ol className="grid gap-3 sm:grid-cols-3">
             {["立場を選ぶ", "困りごとを選ぶ", "地域を選ぶ"].map((label, index) => (

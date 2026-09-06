@@ -16,6 +16,9 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "_headers",
+  "favicon.ico",
+  "icon.svg",
+  "apple-icon.png",
 ];
 
 await Promise.all(
